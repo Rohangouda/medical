@@ -84,7 +84,7 @@ class CategoryController extends Controller
             'cat_name.required'=> 'Category Name Required*'
          ]);
 
-        dd($id);
+        // dd($id);
               
         if (Mst_Category::find($id)->update($request->all()))
         {
