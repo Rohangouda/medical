@@ -89,7 +89,7 @@ $(document).ready(function () {
     $(document).on('click', '.mst_category_clicked', function () {
         let category_name = $(this).data('category_name');
         let category_id = $(this).data('category_id');
-        window.open(baseUrl + '/medfin/' + category_name + '=' + category_id, '_self');
+        window.open(baseUrl + '/medfin/' + category_name + '=' + category_id, '_self');  
     });
 
     //----- Product record by category -----
@@ -116,7 +116,6 @@ $(document).ready(function () {
                 $('#loader').modal('hide');
             }
         });
-
     }
 
     const __renderAllProductRecords = (data, extra) => {

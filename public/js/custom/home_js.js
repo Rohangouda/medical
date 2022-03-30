@@ -3,9 +3,6 @@ $(document).ready(function () {
     let page_no = 0;
     let perPage = 8;
 
-    fetch("https://services.medfin.in/catalog/v3/city-service-list").then(a=>a.json()).then(r=>{
-   console.log(r.data[0].serviceId);
-    })
 
     getAllCategories(page_no, perPage);
     function getAllCategories(page_no, perPage) {
@@ -30,7 +27,7 @@ $(document).ready(function () {
                         if (cVal.image != null) {
                             categories += '<img src="' + baseUrl + '/storage/category/' + cVal.image + '" alt="Categories Image"></img>';
                         } else {
-                            categories += '<img src="' + baseUrl + '/images/product.png" alt="Categories Image"></img>';
+                            categories += '<img src="' + baseUrl + '/medfin/favicon.png" alt="Categories Image"></img>';
                         }
                         categories += '</div>' +
                             '<div class="detail-box">' +
@@ -70,7 +67,7 @@ $(document).ready(function () {
     $(document).on('click', '.category_click', function () {
         let category_name = $(this).data('category_name');
         let category_id = $(this).data('category_id');
-        window.open(baseUrl + '/medfin/' + category_name + '=' + category_id, '_self');
+        window.open(baseUrl + '/medfin/' + category_name, '_self');
         // alert('category_name : '+category_name +' category_id : '+category_id);
     });
 });

@@ -7,7 +7,7 @@
   <!-- Sidebar Header starts-->
   <div class="sidebar-header">
     <div class="logo clearfix" style="background: white;">
-      <a class="text-center" href="{{URL('/admin/dashboard')}}">
+      <a class="text-center" href="{{URL('/')}}">
         <div class="my-2"><img src="{{ asset('medfin/medfin-logo.svg') }}" width="120" alt="Apex Logo" /></div>
       </a>
       {{-- <a style=" margin-top: 8px; " class="nav-toggle d-none d-lg-none d-xl-block" id="sidebarToggle"

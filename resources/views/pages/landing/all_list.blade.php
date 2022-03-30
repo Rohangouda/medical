@@ -1,6 +1,3 @@
-@extends('layouts.home_layout')
-@section('content')
-
 <!doctype html>
 <html>
 <head>
@@ -12,6 +9,7 @@
 <link href="{{ asset('medfin/css/bootstrap.min.css') }}"  rel="stylesheet">
 <link href="{{ asset('medfin/css/lp-15.css') }}"  rel="stylesheet">
 <link href="{{ asset('medfin/css/swiper-min.css') }}"  rel="stylesheet">
+<script src="{{asset('js/custom/users/all_product_details.js?var=')}}{{date('YmdHis')}}"></script>
 </head>
 <body>
 <!-- Navbar Starts -->
@@ -23,13 +21,12 @@
   
 	<a class="btn btn-appointment" href="javascript:void(0)" data-toggle="modal" data-target="#appointment-form"><span class="btn-appointment-icon"></span> Book Appointment</a>
     </form>
-    <div class="user_option-box">
             @if(Session::has('user_id'))
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-                  <img class="avatar" src="{{asset('app-assets/img/portrait/small/avatar-s-1.png')}}" alt="avatar"
+                  <img class="avatar" src="{{asset('app-assets/img/portrait/small/user.jpg')}}" alt="avatar"
                     height="35" width="35">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -39,47 +36,29 @@
                     Dashboard</a>
                   <a class="dropdown-item" href="{{URL('/admin/profile')}}"><i class="far fa-edit"></i> Edit Profile</a>
                   @endif
-                  @if (Session::get('user_role') == 'user')
-                  <a class="dropdown-item" href="{{ URL('/profile') }}"><i class="far fa-edit"></i> Edit Profile</a>
-                  <a class="dropdown-item" href="{{ URL('/my-order') }}"><i class="far fa-edit"></i> My Order</a>
-                  @endif
                   <a class="dropdown-item" href="{{URL('/logout')}}"><i class="fas fa-power-off"></i> Logout</a>
                 </div>
               </li>
             </ul>
-            @else
-            <div class="input-group">
-              <input type="search" id="global_search_text" class="form-control" placeholder="Search Here"
-                aria-label="Search" aria-describedby="search-addon" />
-              <div class="input-group-append">
-                <button type="button" class="btn bg-white border-primary" id="global_search_btn"><i
-                    class="fas fa-search text-primary"></i></button>
-              </div>
-            </div>
-            <button type="button" class="btn btn-outline-primary mx-2" style="border-radius: 5px"
-              id="login_head_btn">Login
-            </button>
             @endif
-          </div>
-  
 </div>
 
 </nav>
-<div style="background-color: #fff;" class="container-fluid navbar-positioning"></div>
 <!-- Navbar Ends -->	
+<div style="background-color: #fff;" class="container-fluid navbar-positioning"></div>
 <!-- Banner Ends -->
 <section id="about" class="container-fluid home-banner">
 	<div class="container align-items-center">
 		<div class="row align-items-center">
 			<div class="col-md-6">
 				<div>
-                <img src="" class="banner-img" style="width: 90%;">
+                <img src="{{ asset('medfin/images/banner-img.jpg') }}" class="banner-img" style="width:100%;">
                 </div>
 			</div>
 			<div class="col-md-6 banner-text">
 				<h1>Get rid of your glasses in 10 minutes with a Lasik Surgery</h1>
 				<p>Quick and precise Lasik surgery procedures help you correct your vision within minutes</p>
-				
+				{{dd($service)}}
 				
 			</div>
 		</div>
@@ -173,20 +152,25 @@
 	
 <!-- Why This Surgery Section Starts -->
 <section class="container-fluid why-this-surgery">
-@if(!empty($surgery[0]->tittle))
 <div class="container">	
 	<div class="row">
 				<div class="col-md-6 hero d-none d-md-block">
-				<img src="{{asset('/storage/surgery')}}/{{$surgery[0]->image}}"  class="img-fluid" style="width:90%">
-					<!-- <img src="{{ asset('medfin/images/why_surgery.jpg') }}"> -->
+					<img src="{{ asset('medfin/images/why_surgery.jpg') }}" class="img-fluid">
 				</div>
 				<div class="col-md-6">
-					<h2>{{$surgery[0]->tittle ?? '' }}?</h2>
-                   <p>{!! $surgery[0]->content ?? '' !!}</p>
+					<h2>Why a Lasik Surgery?</h2>
+					<span class="hero d-md-none"><img src="images/why_surgery.jpg" class="img-fluid"></span>
+					<p>Here is why you should opt for a FEMTO Lasik surgery from Medfin.</p>
+					<ul>
+						<li>Bladeless Lasik Surgery (FEMTO) that is highly precise</li>
+						<li>The minimal risk involved in the surgery</li>
+						<li>Extremely precise surgery performed by experienced surgeons</li>
+						<li>Fast recovery (within 2-3 days)</li>
+						<li>Surgery only takes 5-10 minutes to get completed</li>
+					</ul>
 				</div>
 	</div>
 </div>	
-@endif
 </section>
 <!-- Why This Surgery Section Ends -->
 	
@@ -213,39 +197,8 @@
 				<div class="col-md-7 rhs">
 					<h3>Here are the types of refractive correction surgeries that the doctor might suggest to you:</h3>
 					<div class="faq" id="accordion">
-                    @if(!empty($accor))
-                    @foreach ($accor as $key => $value)
+
 							  <div class="card">
-								<div class="card-header" id="headingOne">
-								  <h5 class="mb-0">
-									<button class="btn title collapsed" data-toggle="collapse" data-target="#collapse{{ $value->id }}" aria-expanded="false" aria-controls="collapsecollapse{{ $value->id }}">
-									  <h4>{{$value->tittle ??''}}</h4>
-									  <div class="square">
-										<span class="plus-ico"></span>
-										<span class="minus-ico"></span>
-									  </div>
-									</button>
-								  </h5>
-								</div>
-								<div id="collapse{{ $value->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-								  <div class="card-body">
-									  
-									  <div class="row align-items-center">
-									  	<div class="col-12">
-											  <ul>
-												  <li>{{$value->content ??''}}</li>
-												  <li>{{$value->content1 ??''}}</li>
-											  </ul>
-											  {!! $value->content2  ??'' !!}
-									  	</div>
-									  </div>
-									  
-								  </div>
-								</div>
-							  </div>
-                              @endforeach
-                @endif
-							  <!-- <div class="card">
 								<div class="card-header" id="headingTwo">
 								  <h5 class="mb-0">
 									<button class="btn title collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -268,9 +221,9 @@
 									  
 								  </div>
 								</div>
-							  </div> -->
+							  </div>
 
-							  <!-- <div class="card">
+							  <div class="card">
 								<div class="card-header" id="headingThree">
 								  <h5 class="mb-0">
 									<button class="btn title collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -293,7 +246,7 @@
 									  
 								  </div>
 								</div>
-							  </div> -->
+							  </div>
 
 				</div>
 				</div>
@@ -1138,5 +1091,3 @@ var swiper = new Swiper('.swiper-testimonials', {
     </script>
 </body>
 </html>
-
-@stop

@@ -311,7 +311,7 @@ input[type=file] {
                         <div class="clone hide" >
                             <div class="ibox">
                                 <div class="control-group input-group mt-4">
-                                    <img id="blah1" class="img-thumbnail" src="{{asset('images/product.png')}}" alt="your image" />
+                                    <img id="blah1" class="img-thumbnail" src="{{asset('medfin/favicon.png')}}" alt="your image" />
                                     <input type="file" name="filename[]" class="form-control-file" accept="image/png, image/jpeg" onchange="readURL(this,'blah1');" required>
                                 </div>
                             </div>
@@ -319,7 +319,7 @@ input[type=file] {
                         <div class="clone hide" id="id1">
                             <div class="ibox">
                                 <div class="control-group input-group">
-                                    <img id="blah2" class="img-thumbnail" src="{{asset('images/product.png')}}" alt="your image" />
+                                    <img id="blah2" class="img-thumbnail" src="{{asset('medfin/favicon.png')}}" alt="your image" />
                                     <input id="input2" type="file" name="filename[]" class="form-control-file" accept="image/png, image/jpeg" onchange="readURL(this,'blah2');">
                                 </div>
                             </div>
@@ -327,7 +327,7 @@ input[type=file] {
                         <div class="clone hide" id="id2">
                             <div class="ibox">
                                 <div class="control-group input-group ">
-                                    <img id="blah3" class="img-thumbnail" src="{{asset('images/product.png')}}" alt="your image" />
+                                    <img id="blah3" class="img-thumbnail" src="{{asset('medfin/favicon.png')}}" alt="your image" />
                                     <input id="input3" type="file" name="filename[]" class="form-control-file" accept="image/png, image/jpeg" onchange="readURL(this,'blah3');">
                                 </div>
                             </div>
@@ -335,7 +335,7 @@ input[type=file] {
                         <div class="clone hide" id="id3">
                             <div class="ibox">
                                 <div class="control-group input-group">
-                                    <img id="blah4" class="img-thumbnail"src="{{asset('images/product.png')}}" alt="your image" />
+                                    <img id="blah4" class="img-thumbnail"src="{{asset('medfin/favicon.png')}}" alt="your image" />
                                     <input id="input4" type="file" name="filename[]" class="form-control-file" accept="image/png, image/jpeg" onchange="readURL(this,'blah4');">
                                 </div>
                             </div>
@@ -343,7 +343,7 @@ input[type=file] {
                         <div class="clone hide" id="id4">
                             <div class="ibox">
                                 <div class="control-group input-group">
-                                    <img id="blash5" class="img-thumbnail" src="{{asset('images/product.png')}}" alt="your image" />
+                                    <img id="blash5" class="img-thumbnail" src="{{asset('medfin/favicon.png')}}" alt="your image" />
                                     <input id="input5" type="file" name="filename[]" class="form-control-file" accept="image/png, image/jpeg" onchange="readURL(this,'blash5');">
                                 </div>
                             </div>

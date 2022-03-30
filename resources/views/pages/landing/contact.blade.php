@@ -25,7 +25,7 @@ body{
 }
 
 .child1{
-    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://rubyhall.com/img/home/10.jpg's);
+    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://rubyhall.com/img/home/10.jpg');
     background-size:cover;
     display:flex;
     flex-direction:column;
@@ -140,7 +140,7 @@ body{
                         </p>
                          <p>
                             <i class="fab fa-whatsapp"></i> Whatsapp <br />
-                            <a id="href_con_whatsapp_mobile_1" href="" target="_blank"><span id="con_whatsapp_mobile_1"> </span></a>
+                            <a id="href_con_whatsapp_mobile_1" href="" target="_blank"><span id="con_whatsapp_mobile_1">53135 </span></a>
                         </p>
                         <p>
                             <i class=" far fa-envelope"></i> General Support <br />
