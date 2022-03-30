@@ -86,20 +86,20 @@
               <input type="search" id="global_search_text" class="form-control" placeholder="Search Here"
                 aria-label="Search" aria-describedby="search-addon" />
               <div class="input-group-append">
-                <button type="button" class="btn bg-white border-success" id="global_search_btn"><i
-                    class="fas fa-search text-success"></i></button>
+                <button type="button" class="btn bg-white border-primary" id="global_search_btn"><i
+                    class="fas fa-search text-primary"></i></button>
               </div>
             </div>
-            <button type="button" class="btn btn-outline-success mx-2" style="border-radius: 5px"
+            <button type="button" class="btn btn-outline-primary mx-2" style="border-radius: 5px"
               id="login_head_btn">Login
             </button>
             @endif
 
-            <button type="button" class="btn btn-outline-success" style="border-radius: 5px" data-toggle="modal"
+            <!-- <button type="button" class="btn btn-outline-success" style="border-radius: 5px" data-toggle="modal"
               data-target="#modalCookie1">
               <i class="fa fa-cart-plus" aria-hidden="true"> </i>
               <span class="notification badge badge-pill badge-danger cartCount"></span>
-            </button>
+            </button> -->
           </div>
         </div>
       </nav>

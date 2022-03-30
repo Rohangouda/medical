@@ -30,13 +30,12 @@ class CategoryController extends Controller
 
     public function create_category(Request $req)
     {
+        // dd($req);
         // dd(session::get('user_id'));
         $name = strtolower($req->cat_name);
         $req->cat_name = ucfirst($name);
         $req->validate([
-            'cat_name'=>'required|unique:mst_categories',
-            'image' => 'required',
-            'image.*' => 'file|mimes:jpeg,jpg,png|min:50|max:1024'
+            'cat_name'=>'required|unique:mst_categories'
         ]);
 
 
@@ -76,15 +75,13 @@ class CategoryController extends Controller
     
     public function update(Request $request,$id)
     {
-        $request->validate([  
-        'cat_name'=>'required|unique:mst_categories',  
+        // $request->validate([  
+        // 'cat_name'=>'required|unique:mst_categories',  
           
-         ],
-         [
-            'cat_name.required'=> 'Category Name Required*'
-         ]);
-
-        dd($id);
+        //  ],
+        //  [
+        //     'cat_name.required'=> 'Category Name Required*'
+        //  ]);
               
         if (Mst_Category::find($id)->update($request->all()))
         {

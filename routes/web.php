@@ -11,7 +11,7 @@ Route::get('/optimize', function () {
 
 Route::get('/', 'PageController@index')->name('home');
 Route::post('/theme-categories', 'HomeController@themeCategories');
-Route::get('/shop-by-category/{id}', 'PageController@shopByCategory');
+Route::get('/medfin/{id}', 'PageController@shopByCategory');
 Route::post('/get-product-by-category', 'HomeController@getProductByCategory');
 Route::get('/search-in-peepal-store/{search_text}', 'PageController@shopByCategory');
 Route::Post('/get-record-by-gsearch', 'HomeController@globalSearchByUsers');
@@ -35,8 +35,6 @@ Route::get('/clear-cache', function () {
 	print_r('Please refresh the browser');
 });
 
-Route::post('/get-theme-sliders', 'HomeController@getThemeSliders');
-Route::post('/get-product-sliders', 'HomeController@getProductSliders');
 
 Route::group(['middleware'=>['LoginCheck']],function(){
     //-----OnlyAdminAccessibleRoute-----
@@ -54,39 +52,15 @@ Route::group(['middleware'=>['LoginCheck']],function(){
         //-----Staff registration-----
         Route::post('/admin/master-opration/add-staff', 'AdminController@addStaff');
         //-----Page Management-----
-        Route::get('/admin/contact-us-management','PageController@contact_us_management');
-        Route::post('/admin/contact-us/update','AdminController@contact_us_update');
         // -----Theme slider -------
-        Route::get('/admin/theme-slider','PageController@themeSlider');
-        Route::post('/admin/theme-slider/add-theme-image','AdminController@addThemeSlider');
-        Route::post('/admin/theme-slider/delete-slider', 'AdminController@deleteThemeSlider');
-        Route::get('/admin/theme-slider/edit-slider-detail', 'AdminController@editThemeSliderDetail');
-        route::post('/admin/theme-slider/update','admincontroller@updatetheme')->name('update.slider');
+
 //        Route::put('/admin/theme-slider/update','admincontroller@updatetheme')->name('update.slider');
 
         //-----Invoice-----
         Route::get('/admin/invoice/print-invoice/{id1}', 'PageController@printInvoice');
 
-        //-----Reports-----
-        Route::post('/admin/reports/search-report', 'AdminController@searchLogReports');
-        Route::get('/admin/report/search-log-report/{user_id}', 'PageController@searchLogReport');
-        Route::post('/admin/reports/detail-search-report-by-user', 'AdminController@detalSearchReportByUser');
 
-        // -----Theme slider -------
-        Route::get('/admin/sliders/home-slider', 'PageController@homeSlider');
-        Route::post('/admin/theme-slider/get-theme-records', 'AdminController@getThemeSlider');
-        Route::post('/admin/theme-slider/add-theme-image','AdminController@addThemeSlider');
-        Route::post('/admin/theme-slider/delete-slider', 'AdminController@deleteThemeSlider');
-        Route::post('/admin/theme-slider/edit-slider-detail', 'AdminController@editThemeSliderDetail');
-        Route::post('/admin/theme-slider/update','AdminController@updateTheme')->name('update.slider');
 
-        // -----Product slider -------
-        Route::get('/admin/sliders/product-slider', 'PageController@productSlider');
-        Route::post('/admin/product-slider/get-product-records', 'AdminController@getProductSlider');
-        Route::post('/admin/product-slider/add-product-image','AdminController@addProductSlider');
-        Route::post('/admin/product-slider/delete-slider', 'AdminController@deleteProductSlider');
-        Route::post('/admin/product-slider/edit-slider-detail', 'AdminController@editProductSliderDetail');
-        Route::post('/admin/product-slider/update','AdminController@updateProductSliders');
 
     });
 
@@ -153,15 +127,10 @@ Route::group(['middleware'=>['LoginCheck']],function(){
         Route::post('/admin/order-management/delevered', 'AdminController@orderDeleveredByStaff');
 
         //---- Report Generation-----
-        // order report
-        Route::get('/admin/report/order-report','PageController@orderReport');
+
         Route::post('/admin/report/get-all-orders-report', 'AdminController@getAllOrdersReport');
         Route::post('/admin/report/view-orders-detail', 'AdminController@viewOrderDetail');
-        // product report
-        Route::get('/admin/report/product-report','PageController@productReport');
         Route::post('/admin/product-sell-details','ProductController@productSellDetails');
-        // search report
-        Route::get('/admin/report/search-report','PageController@searchReport');
 
         //-----Theme content-------
         Route::post('/admin/theme-slider/get-theme-records', 'AdminController@getThemeData');

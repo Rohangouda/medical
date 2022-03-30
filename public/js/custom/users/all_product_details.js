@@ -63,7 +63,7 @@ $(document).ready(function () {
                     let x = '';
                     $.each(res.category_list, function (cKey, cVal) {
                         let $activeCategory = '';
-                        if (uri_request == 'shop-by-category') {
+                        if (uri_request == 'medfin') {
                             if (uri_id == cVal.id) {
                                 $activeCategory = 'active-sidebar';
                             }
@@ -89,7 +89,7 @@ $(document).ready(function () {
     $(document).on('click', '.mst_category_clicked', function () {
         let category_name = $(this).data('category_name');
         let category_id = $(this).data('category_id');
-        window.open(baseUrl + '/shop-by-category/' + category_name + '=' + category_id, '_self');
+        window.open(baseUrl + '/medfin/' + category_name + '=' + category_id, '_self');
     });
 
     //----- Product record by category -----

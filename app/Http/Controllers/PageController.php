@@ -54,49 +54,6 @@ class PageController extends Controller
     }
 
     public function adminDashboard() {
-        $result['sold'] = 0;
-        $result['total_sold_count'] = 0;
-        $result['total_sold_amount'] = 0;
-        $result['stock'] = 0;
-        $result['total_stock_count'] = 0;
-        $result['total_stock_amount'] = 0;
-        $result['hold'] = 0;
-        $result['total_hold_count'] = 0;
-        $result['total_hold_amount'] = 0;
-
-        // sold
-        $result['sold'] = Product::with('productSold')->get();
-        // dd($result['sold']);
-        foreach($result['sold'] as $key => $value)
-        {
-            foreach ($value->productSold as $k => $val) {
-                $result['total_sold_count'] += $val->quantity;
-                $result['total_sold_amount'] += $val->price; 
-            }
-        }
-        // hold
-        $result['hold'] = DB::table('products')->join('product_history','product_history.product_id','products.id')->whereNull('products.deleted_at')->whereNull('product_history.deleted_at')
-            ->where('product_history.order_status',2)
-            ->select('product_history.quantity','product_history.price')->get();
-        foreach($result['hold'] as $key2 => $value2)
-        {
-            $result['total_hold_count'] += $value2->quantity;
-            $result['total_hold_amount'] += $value2->price;
-        } 
-        // stock
-        $result['stock'] = DB::table('products')->join('product_history','product_history.product_id','products.id')->whereNull('products.deleted_at')->whereNull('product_history.deleted_at')
-            ->where('product_history.order_status',1)
-            ->select('product_history.quantity','product_history.price')->get();
-        foreach($result['stock'] as $key1 => $value1)
-        {
-            $result['total_stock_count'] += $value1->quantity;
-            $result['total_stock_amount'] += $value1->price*$value1->quantity;
-        }
-        
-        $result['product'] = Product::whereNull('deleted_at')->latest()->limit(5)->with('productExtraProp','productImagesByMaster')->get();
-        $result['user_count'] = User::where('role','user')->count();
-        $result['user'] = User::where('role','user')->latest()->limit(10)->get();
-        $result['staff_count'] = User::where('role','Staff')->count();
         $result['page_title'] = 'Admin || Dashboard';
         return view('admin/dashboard',$result);
     }
@@ -170,18 +127,6 @@ class PageController extends Controller
         return view('admin/order_list',$result);
     }
 
-    public function orderReport()
-    {
-        $result['page_title'] = 'Admin || Order-report';
-        return view('admin/report/order_report',$result);
-    }
-
-    public function contact_us_management()
-    {
-        $result['data'] = ContactUsModel::first();
-        $result['page_title'] = 'Admin || Contact-us-management';
-        return view('admin/page_management/contact_us_management',$result);
-    }
 
     public function myOrder()
     {
@@ -212,17 +157,6 @@ class PageController extends Controller
         //return view('/invoice/invoice', $result);
     }
 
-    public function productReport()
-    {
-        $result['page_title'] = 'Admin || Product-report';
-        return view('admin/report/product_report',$result);
-    }
-
-    public function searchReport()
-    {
-        $result['page_title'] = 'Admin || Search-report';
-        return view('admin/report/search_report',$result);
-    }
 
     public function searchLogReport(){
         $result['page_title'] = 'Admin || Search-log-report';
@@ -240,16 +174,6 @@ class PageController extends Controller
     public function orderMail(){
         $result['page_title'] = 'Admin || order-mail';
         return view('emails/order_notification_mail',$result);
-    }
-
-    //-----slider section-----
-    public function homeSlider(){
-        $result['page_title'] = 'Admin || Home-slider';
-        return view('admin/sliders/home_slider',$result);
-    }
-    public function productSlider(){
-        $result['page_title'] = 'Admin || Product-slider';
-        return view('admin/sliders/product_slider',$result);
     }
 
     

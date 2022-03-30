@@ -10,14 +10,6 @@ use Illuminate\Support\Facades\Redirect;
 class BrandController extends Controller
 {
     
-    
-    // public function get_brand()
-    // {
-    //   $data=Mst_Brand::orderBy('id','DESC')->get();
-    //   dd($data);
-    //     return view('admin.management.brand_list', compact('data'));  
-    // }
-
     public function create_brand(Request $req)
     {
         $name = trim(strtolower($req->brand_name));

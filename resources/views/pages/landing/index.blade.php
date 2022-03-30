@@ -21,7 +21,7 @@
     <div class="container">
         <div class="heading_container text-success">
             <h2 style="color: #2f2d46">
-                our Services
+                Our Services
             </h2>
         </div>
         <hr>

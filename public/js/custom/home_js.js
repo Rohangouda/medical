@@ -3,6 +3,10 @@ $(document).ready(function () {
     let page_no = 0;
     let perPage = 8;
 
+    fetch("https://services.medfin.in/catalog/v3/city-service-list").then(a=>a.json()).then(r=>{
+   console.log(r.data[0].serviceId);
+    })
+
     getAllCategories(page_no, perPage);
     function getAllCategories(page_no, perPage) {
         $.ajax({
@@ -66,7 +70,7 @@ $(document).ready(function () {
     $(document).on('click', '.category_click', function () {
         let category_name = $(this).data('category_name');
         let category_id = $(this).data('category_id');
-        window.open(baseUrl + '/shop-by-category/' + category_name + '=' + category_id, '_self');
+        window.open(baseUrl + '/medfin/' + category_name + '=' + category_id, '_self');
         // alert('category_name : '+category_name +' category_id : '+category_id);
     });
 });
