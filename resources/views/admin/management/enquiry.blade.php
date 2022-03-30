@@ -69,7 +69,7 @@
     aria-hidden="true">
     <div class="modal-dialog mt-5" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-success">
+            <div class="modal-header bg-info">
                 <h5 class="modal-title" id="exampleModalLabel">VIEW ENQUIRY DETAILS</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -107,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer bg-success">
+            <div class="modal-footer bg-info">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>

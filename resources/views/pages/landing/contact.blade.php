@@ -15,7 +15,7 @@
     margin:80px 0;
 }
 body{
-    color: green;
+    color: blue;
 }
 
 .contact-child{
@@ -25,7 +25,7 @@ body{
 }
 
 .child1{
-    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url({{ asset('images/dark.jpg') }});
+    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://rubyhall.com/img/home/10.jpg's);
     background-size:cover;
     display:flex;
     flex-direction:column;
@@ -101,7 +101,7 @@ body{
     }
 
     .child2{
-        background-image:linear-gradient(rgba(255,255,255,0.7),rgba(255,255,255,0.7)), url({{ asset('images/dark.jpg') }});
+        background-image:linear-gradient(rgba(255,255,255,0.7),rgba(255,255,255,0.7)), url('https://rubyhall.com/img/home/10.jpg'));
         background-size:cover;
     }
 
@@ -187,7 +187,7 @@ body{
                             <p>Message *</p>
                             <textarea id="message" class="message" rows="4" cols="20" Required="required" name="message" ></textarea>
                             
-                            <button type="submit" class="btn btn-color my-3" style="width: 100%; background-color: darkgreen; color:white;">SEND MESSAGE</button>
+                            <button type="submit" class="btn btn-color my-3" style="width: 100%; background-color: blue; color:white;">SEND MESSAGE</button>
                          </form>
                         </div>
                     </div>

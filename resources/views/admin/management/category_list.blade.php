@@ -125,7 +125,7 @@ input[type=file] {
                     @csrf
                     <div class="form-group">
                         <label>Service*</label>
-                        <select type="text" id="cat_name" class="form-control" 
+                        <select type="text" id="" class="form-control" 
                              style="background-color: white;" >
                             <option></option>
                         </select>
@@ -137,12 +137,12 @@ input[type=file] {
                     </div>
                     <div class="form-group">
                         <label>Enter Tags*</label>
-                        <input type="text" id="cat_name" class="form-control" name="cat_name"
+                        <input type="text" id="tag" class="form-control" name="tag"
                             placeholder="Enter Tags" style="background-color: white;" >
                     </div>
                     <div class="form-group text-center">
                         <img class="my-2" id="blah" src="{{ asset('images/product.png') }}" alt="your image" />
-                        <input type='file' name="image" onchange="readURL(this);" class="form-control" required />
+                        <input type='file' name="image" onchange="readURL(this);" class="form-control" />
                     </div>
 
                     <div class="text-center">

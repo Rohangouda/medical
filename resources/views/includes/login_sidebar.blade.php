@@ -26,12 +26,12 @@
               data-i18n="Dashboard">Dashboard</span></a>
         </li>
         <li class="has-sub nav-item"><a href="javascript:;"><i class="ft-settings"></i><span class="menu-title"
-              data-i18n="UI Kit">Store Management</span>
+              data-i18n="UI Kit">Page Management</span>
             {{-- <span class="tag badge badge-pill badge-success float-right mr-1 mt-1">6</span> --}}
           </a>
           <ul class="menu-content">
             <li><a href="{{URL('/admin/master-record/category-list')}}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Grid">Master Category</span></a>
+                  class="menu-item" data-i18n="Grid">Master Service</span></a>
             </li>
             <li><a href="{{ URL('/admin/master-record/brand_list') }}"><i class="ft-arrow-right submenu-icon"></i><span
                   class="menu-item" data-i18n="Typography">Master Brand</span></a>
@@ -53,60 +53,6 @@
         </li>
         <li class="nav-item"><a href="{{ URL('/admin/all-enquiries')}}"><i class="ft-message-square"></i><span
               class="menu-title" data-i18n="Enquiry">Enquiry</span></a>
-        </li>
-        @if(Session::get('user_role') != 'Staff')
-        <li class="has-sub nav-item"><a href="javascript:;"><i class="ft-settings "></i><span class="menu-title"
-              data-i18n="UI Kit">Page Management</span>
-            {{-- <span class="tag badge badge-pill badge-success float-right mr-1 mt-1">6</span> --}}
-          </a>
-          <ul class="menu-content">
-            <li><a href="{{URL('/admin/contact-us-management')}}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Grid">Contact Us</span></a>
-            </li>
-          </ul>
-        </li>
-        {{-- <li class="has-sub nav-item"><a href="javascript:;"><i class="ft-settings "></i><span class="menu-title"
-              data-i18n="UI Kit">Sliders</span>
-          </a>
-          <ul class="menu-content">
-            <li><a href="{{URL('/admin/theme-slider')}}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Grid">Home Slider</span></a>
-            </li>
-            <li><a href="{{URL('/admin/theme-slider')}}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Grid">Product Slider</span></a>
-            </li>
-          </ul>
-        </li> --}}
-
-        <li class="has-sub nav-item"><a href="javascript:;"><i class="ft-book-open"></i><span class="menu-title"
-              data-i18n="UI Kit">Sliders </span>
-            {{-- <span class="tag badge badge-pill badge-success float-right mr-1 mt-1">6</span> --}}
-          </a>
-          <ul class="menu-content">
-            <li><a href="{{URL('/admin/sliders/home-slider')}}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Grid">Home Sliders</span></a></li>
-            <li><a href="{{URL('/admin/sliders/product-slider')}}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Grid">Product Sliders</span></a></li>
-          </ul>
-        </li>
-        @endif
-        <li class="has-sub nav-item"><a href="javascript:;"><i class="ft-file-text"></i><span class="menu-title"
-              data-i18n="UI Kit">Report</span>
-            {{-- <span class="tag badge badge-pill badge-success float-right mr-1 mt-1">6</span> --}}
-          </a>
-          <ul class="menu-content">
-            <li><a href="{{URL('/admin/report/order-report')}}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Grid">Order Report</span></a>
-            </li>
-            <li><a href="{{ URL('/admin/report/product-report') }}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Typography">Product Report</span></a>
-            </li>
-            <li><a href="{{ URL('/admin/report/search-report') }}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Syntax Highlighter">Search Report</span></a>
-              <!-- <li><a href="{{ URL('/admin/report/all-search-report') }}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item" data-i18n="Syntax Highlighter">Search Product Report</span></a> -->
-            </li>
-
-          </ul>
         </li>
       </ul>
     </div>
