@@ -63,7 +63,7 @@ input[type=file] {
                                                             <tr role="row">
                                                                 <th>#</th>
                                                                 <th>NAME</th>
-                                                                <th>IMAGE</th>
+                                                                {{-- <th>IMAGE</th> --}}
                                                                 <th>ACTION</th>
                                                             </tr>
                                                         </thead>
@@ -140,10 +140,10 @@ input[type=file] {
                         <input type="text" id="tag" class="form-control" name="tag"
                             placeholder="Enter Tags" style="background-color: white;" >
                     </div>
-                    <div class="form-group text-center">
+                    {{-- <div class="form-group text-center">
                         <img class="my-2" id="blah" src="{{ asset('images/product.png') }}" alt="your image" />
                         <input type='file' name="image" onchange="readURL(this);" class="form-control" />
-                    </div>
+                    </div> --}}
 
                     <div class="text-center">
                         <input type="submit" class="btn btn-info" value="Submit" name="submit">

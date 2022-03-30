@@ -3,8 +3,8 @@ $(document).ready(function () {
     let page_no = 0;
     let perPage = 8;
 
-    fetch("https://services.medfin.in/catalog/v3/city-service-list").then(a=>a.json()).then(r=>{
-   console.log(r.data[0].serviceId);
+    fetch("https://services.medfin.in/catalog/v3/city-service-list").then(a => a.json()).then(r => {
+        console.log(r.data[0].serviceId);
     })
 
     getAllCategories(page_no, perPage);
@@ -27,10 +27,8 @@ $(document).ready(function () {
                             '<div class="box rounded">' +
                             '<a href="javascript:void(0);" style="color: inherit;" class="category_click" data-category_name=' + cVal.cat_name.toLowerCase().split('/').join('-').split(' ').join('-').split("'").join("").split('&').join('-') + ' data-category_id=' + cVal.id + '>' +
                             '<div class="img-box">';
-                        if (cVal.image != null) {
-                            categories += '<img src="' + baseUrl + '/storage/category/' + cVal.image + '" alt="Categories Image"></img>';
-                        } else {
-                            categories += '<img src="' + baseUrl + '/images/product.png" alt="Categories Image"></img>';
+                        if (cVal.image == null) {
+                            categories += '<img src="' + baseUrl + '/images/med.jpg" alt="Categories Image"></img>';
                         }
                         categories += '</div>' +
                             '<div class="detail-box">' +
@@ -39,7 +37,6 @@ $(document).ready(function () {
                             'View Page ' +
                             '</span>' +
                             '<i class="fa fa-long-arrow-right" aria-hidden="true"></i>' +
-
                             '</div>' +
                             '</a>' +
                             '</div>' +

@@ -37,27 +37,31 @@ class CategoryController extends Controller
         $req->validate([
             'cat_name'=>'required|unique:mst_categories'
         ]);
-
-
-        DB::transaction(function () use ($req) {
-            if($req->hasFile('image'))
-            {
-                $file = $req->file('image');
-                $fileName = $file->getClientOriginalExtension();
-                // upload
-                $file_path = "storage/category/";
-                $random = rand(1, 100);
-                $fileName = $req->cat_name . "." . $fileName;
-                $file->move($file_path, $fileName);
-
-                $brand_name = new Mst_Category();
+        $brand_name = new Mst_Category();
                 $brand_name->cat_name=$req->cat_name;
-                $brand_name->image=$fileName;
                 $brand_name->level=1;
                 $brand_name->updated_by=session::get('user_id');
                 $brand_name->save();
-            }
-        });
+            print_r($brand_name);
+        // DB::transaction(function () use ($req) {
+        //     if($req->hasFile('image'))
+        //     {
+        //         $file = $req->file('image');
+        //         $fileName = $file->getClientOriginalExtension();
+        //         // upload
+        //         $file_path = "storage/category/";
+        //         $random = rand(1, 100);
+        //         $fileName = $req->cat_name . "." . $fileName;
+        //         $file->move($file_path, $fileName);
+
+        //         $brand_name = new Mst_Category();
+        //         $brand_name->cat_name=$req->cat_name;
+        //         $brand_name->image=$fileName;
+        //         $brand_name->level=1;
+        //         $brand_name->updated_by=session::get('user_id');
+        //         $brand_name->save();
+        //     }
+        // });
         
         return redirect()->back()->with('message','Category has been created successfully!');
 
