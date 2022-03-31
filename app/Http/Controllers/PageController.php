@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 use Mockery\Undefined;
 use Session;
 use App\ThemeSlider;
+use App\Banner;
 
 class PageController extends Controller
 {
@@ -44,7 +45,8 @@ class PageController extends Controller
     public function shopByCategory($id)
     {
         $result['page_title'] = 'Medfin || Service-list';
-        $result['service'] = Mst_Category::where('cat_name',$id)->first();
+        $result['service'] = Mst_Category::where('ser_name',$id)->first();
+        $result['banner'] = Banner::where('Deactivate',0)->where('service_name',$id)->first();
         return view('pages.landing.all_list', $result);
     }
 
@@ -59,6 +61,12 @@ class PageController extends Controller
         return view('admin/dashboard',$result);
     }
 
+    public function content() {
+        $result['page_title'] = 'Admin || Add Page';
+        $result['service'] = Mst_Category::get();
+        return view('admin/content',$result);
+    }
+    
     public function StaffDashboard(){
         $result['product_count'] = ProductHistory::get();
         $result['total_sold_count'] = 0;
@@ -90,12 +98,6 @@ class PageController extends Controller
     public function masterCategory() {
         $result['page_title'] = 'Category-list';
         return view('admin/management/category_list',$result);
-    }
-
-    public function masterBrand() {
-        // $result['data']=Mst_Brand::orderBy('id','DESC')->get();
-        $result['page_title'] = 'Brand-list';
-        return view('admin/management/brand_list',$result);
     }
 
     public function enquiriesList() {

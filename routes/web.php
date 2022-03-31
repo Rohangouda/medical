@@ -9,6 +9,7 @@ Route::get('/optimize', function () {
     return redirect('/');
 });
 
+
 Route::get('/', 'PageController@index')->name('home');
 Route::post('/theme-categories', 'HomeController@themeCategories');
 Route::get('/medfin/{id}', 'PageController@shopByCategory');
@@ -60,8 +61,6 @@ Route::group(['middleware'=>['LoginCheck']],function(){
         Route::get('/admin/invoice/print-invoice/{id1}', 'PageController@printInvoice');
 
 
-
-
     });
 
     //-----OnlyStaffAccessibleRoute-----
@@ -73,8 +72,8 @@ Route::group(['middleware'=>['LoginCheck']],function(){
     });
 
 
-    //-----AdminAndStaffAccessibleRoute-----
-    Route::group(['middleware' => ['AdminAndStaffAccessibleRoute']], function() {
+         //-----AdminAndStaffAccessibleRoute-----
+        Route::group(['middleware' => ['AdminAndStaffAccessibleRoute']], function() {
         //-----Master Category-----
         Route::get('/admin/master-record/category-list','PageController@masterCategory');
         Route::post('/admin/master-record/get-all-category', 'CategoryController@get_category');
@@ -82,14 +81,6 @@ Route::group(['middleware'=>['LoginCheck']],function(){
         Route::post('/admin/master-record/edit-category','CategoryController@editCategory');
         Route::post('/admin/master-record/update-category/{id}','CategoryController@update')->name('update.category');
         Route::post('/admin/master-record/delete-category','CategoryController@delete_record');
-
-        //----- Master Brand-----
-        Route::get('/admin/master-record/brand_list','PageController@masterBrand');
-        Route::post('/admin/master-record/get-all-brands-record', 'BrandController@getAllBrandsRecord');
-        Route::post('/admin/master-record/register/brand','BrandController@create_brand')->name('master.brand');
-        Route::post('/admin/master-record/edit-brand-detail', 'BrandController@editBrandDetail');
-        Route::post('/admin/master-record/brand_delete_modal','BrandController@delete_record')->name('brand_delete');
-        Route::post('/admin/master-record/update/{id}','BrandController@update')->name('update.brand');
 
         //----- Product-----
         Route::get('/admin/product_list','ProductController@get_product')->name('get_product');
@@ -117,7 +108,12 @@ Route::group(['middleware'=>['LoginCheck']],function(){
         Route::get('/admin/staff-users-list', 'PageController@staffUsersList');
         Route::post('/admin/staff-user-records', 'AdminController@getStaffUsersRecords');
 
-
+            //content
+            Route::get('/admin/content','PageController@content');
+            Route::post('/register/content','ContentController@create_banner')->name('master.banner');
+            // Route::post('/update/content','ContentController@update_content')->name('update.content');
+            // Route::post('/delete/content','ContentController@delete_content')->name('delete.content');
+            Route::post('/register/content','ContentController@create_banner')->name('master.banner');
 
         //---- Order Management
         Route::get('/admin/order-list','PageController@orderList');
@@ -194,5 +190,4 @@ Route::post('/check_orders_for_self_delete', 'HomeController@checkOrdersForSelfD
 
         //search routes
         Route::get('/product_list_search','ProductController@product_list_search')->name('product_list_search');
-
         Route::get('/home', 'HomeController@index')->name('home');

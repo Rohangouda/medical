@@ -112,11 +112,11 @@ class ProductController extends Controller
     public function update(Request $request,$id)
     {
         $request->validate([  
-        'cat_name'=>'required',  
+        'ser_name'=>'required',  
           
          ],
          [
-            'cat_name.required'=> 'Category Name Required*'
+            'ser_name.required'=> 'Category Name Required*'
          ]);
               
         if (Mst_Category::find($id)->update($request->all()))

@@ -42,10 +42,11 @@
             </ul>
             @endif
 </div>
-
 </nav>
-<!-- Navbar Ends -->	
+<!-- Navbar Ends -->
+@if (!empty($banner))	
 <div style="background-color: #fff;" class="container-fluid navbar-positioning"></div>
+
 <!-- Banner Ends -->
 <section id="about" class="container-fluid home-banner">
 	<div class="container align-items-center">
@@ -56,17 +57,17 @@
                 </div>
 			</div>
 			<div class="col-md-6 banner-text">
-				<h1>Get rid of your glasses in 10 minutes with a Lasik Surgery</h1>
-				<p>Quick and precise Lasik surgery procedures help you correct your vision within minutes</p>
-				{{dd($service)}}
-				
+				<h1>{{$banner->tittle}}</h1>
+				<p>{{$banner->description}}</p>
+				<!-- <h1>Get rid of your glasses in 10 minutes with a Lasik Surgery</h1>
+				<p>Quick and precise Lasik surgery procedures help you correct your vision within minutes</p> -->
+			{{--	{{dd($service)}} --}}
 			</div>
 		</div>
 		
 	</div>
-</section>
-	
-	
+</section>	
+@endif	
 <!-- Top Form Starts -->
 <section class="container-fluid top-form d-none d-lg-block">
 	<div class="container">

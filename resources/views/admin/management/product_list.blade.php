@@ -234,7 +234,7 @@ input[type=file] {
                                     <option value="">----Select Option----</option>
                                     @if(!empty($cat))
                                     @foreach($cat as $val)
-                                    <option value="{{$val->id}}">{{$val->cat_name}}</option>
+                                    <option value="{{$val->id}}">{{$val->ser_name}}</option>
                                     @endforeach
                                     @endif
                                 </select>
@@ -382,7 +382,7 @@ input[type=file] {
                     @csrf
                     <div class="form-group">
                         <label>category name</label>
-                        <input type="text" class="form-control" id="edit-title" name="cat_name" value=""
+                        <input type="text" class="form-control" id="edit-title" name="ser_name" value=""
                             style="background-color: white;">
                     </div>
                     {{-- <div class="form-group">

@@ -68,7 +68,7 @@ $(document).ready(function () {
                                 $activeCategory = 'active-sidebar';
                             }
                         }
-                        x += '<li><a href="javascript:void(0);" class="mst_category_clicked ' + $activeCategory + '" data-category_name=' + cVal.cat_name.trim().toLowerCase().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-') + ' data-category_id=' + cVal.id + '>' + cVal.cat_name + '</a></li>';
+                        x += '<li><a href="javascript:void(0);" class="mst_category_clicked ' + $activeCategory + '" data-category_name=' + cVal.ser_name.trim().toLowerCase().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-') + ' data-category_id=' + cVal.id + '>' + cVal.ser_name + '</a></li>';
                     });
                     $('._left_side_mst_category').html(x);
                 } else {

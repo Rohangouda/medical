@@ -10,10 +10,10 @@ class Mst_Category extends Model
 {
     use  SoftDeletes;
 
-    protected $table = "mst_categories";
+    protected $table = "mst_services";
     
     protected $fillable =[
-        'cat_name',
+        'ser_name',
         'service_id',
         'tags',
         'level',

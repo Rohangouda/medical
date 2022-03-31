@@ -130,7 +130,7 @@ input[type=file] {
                     </div>
                     <div class="form-group">
                         <label>Page URL*</label>
-                        <input type="text" id="cat_name" class="form-control" name="cat_name"
+                        <input type="text" id="ser_name" class="form-control" name="ser_name"
                             placeholder="Enter page Name" style="background-color: white;" required>
                     </div>
                     <div class="form-group">
@@ -166,7 +166,7 @@ input[type=file] {
                 <form action="" method="POST" id="updateUrl" onsubmit="return checkEditForm(this);">
                     @csrf <div class="form-group">
                         <label>Service name</label>
-                        <input type="text" class="form-control" id="edit-title" name="cat_name"
+                        <input type="text" class="form-control" id="edit-title" name="ser_name"
                             style="background-color: white;">
                     </div>
             <div class="text-center">

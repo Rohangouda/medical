@@ -34,7 +34,7 @@ $(document).ready(function() {
                     $.each(res.category_list.data, function(lKey, lVal){
                         x += '<tr>'+
                             '<td>'+parseInt(lKey+1)+'</td>'+
-                            '<td>'+lVal.cat_name+'</td>';
+                            '<td>'+lVal.ser_name+'</td>';
                             if(lVal.image != null){
                                 x += '<td><img src="'+baseUrl+'/storage/category/'+lVal.image+'" class="img-thumbnail" style="max-height:60px;"></td>';
                             }else {
@@ -86,7 +86,7 @@ $(document).ready(function() {
                 },
                 success: function(res){
                     if(res.status == 200){
-                        $('#edit-title').val(res.data.cat_name);
+                        $('#edit-title').val(res.data.ser_name);
                         let url = "{{url('/update-category')}}/" + res.data.id;
                         $('#updateUrl').attr('action', url);
 

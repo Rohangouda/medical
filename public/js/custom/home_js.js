@@ -22,7 +22,7 @@ $(document).ready(function () {
                     $.each(res.category_list.data, function (cKey, cVal) {
                         categories += '<div class="col-sm-6 col-lg-3 m-4  m-md-0">' +
                             '<div class="box rounded">' +
-                            '<a href="javascript:void(0);" style="color: inherit;" class="category_click" data-category_name=' + cVal.cat_name.toLowerCase().split('/').join('-').split(' ').join('-').split("'").join("").split('&').join('-') + ' data-category_id=' + cVal.id + '>' +
+                            '<a href="javascript:void(0);" style="color: inherit;" class="category_click" data-category_name=' + cVal.ser_name.toLowerCase().split('/').join('-').split(' ').join('-').split("'").join("").split('&').join('-') + ' data-category_id=' + cVal.id + '>' +
                             '<div class="img-box">';
                         if (cVal.image != null) {
                             categories += '<img src="' + baseUrl + '/storage/category/' + cVal.image + '" alt="Categories Image"></img>';
@@ -31,7 +31,7 @@ $(document).ready(function () {
                         }
                         categories += '</div>' +
                             '<div class="detail-box">' +
-                            '<h5>' + cVal.cat_name + '</h5>' +
+                            '<h5>' + cVal.ser_name + '</h5>' +
                             '<span>' +
                             'View Page ' +
                             '</span>' +
