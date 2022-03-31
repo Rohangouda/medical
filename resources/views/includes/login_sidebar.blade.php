@@ -1,4 +1,4 @@
-@if(Session::get('user_role') != 'user')
+
 <!-- main menu-->
 <!--.main-menu(class="#{menuColor} #{menuOpenType}", class=(menuShadow == true ? 'menu-shadow' : ''))-->
 <div class="app-sidebar menu-fixed" data-background-color="info"
@@ -33,15 +33,12 @@
             <li><a href="{{URL('/admin/master-record/category-list')}}"><i class="ft-arrow-right submenu-icon"></i><span
                   class="menu-item" data-i18n="Grid">Master Service</span></a>
             </li>
-            <li><a href="{{ URL('/admin/master-record/brand_list') }}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Typography">Master Brand</span></a>
-            </li>
             <li><a href="{{ URL('/admin/product_list') }}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Syntax Highlighter">Product</span></a>
+                  class="menu-item" data-i18n="Syntax Highlighter">Content</span></a>
             </li>
-            {{-- <li><a href=""><i class="ft-arrow-right submenu-icon"></i><span class="menu-item"
-                  data-i18n="Enquiry">Enquiry</span></a>
-            </li> --}}
+            <li><a href="{{ URL('/admin/content') }}"><i class="ft-arrow-right submenu-icon"></i><span
+                  class="menu-item" data-i18n="Syntax Highlighter">Page Content</span></a>
+            </li>
 
           </ul>
         </li>
@@ -61,4 +58,3 @@
   <div class="sidebar-background"></div>
 
 </div>
-@endif

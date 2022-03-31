@@ -159,7 +159,7 @@ $(document).ready(function() {
                             '<td>'+plVal.product_details.price+'</td>'+
                             '<td> '+plVal.product_details.mrp_price+'</td>'+
                             '<td> In-stoke : '+plVal.product_details.quantity+'</td>'+
-                            '<td>'+plVal.rln_pro_cat.category.cat_name+'</td>'+
+                            '<td>'+plVal.rln_pro_cat.category.ser_name+'</td>'+
                             '<td>'+$brand_id+'</td>'+
                             '<td>'+plVal.detail+'</td>'+
                         '</tr>';
@@ -536,7 +536,7 @@ $(document).ready(function() {
                             '<td>'+plVal.product_details.price+'</td>'+
                             '<td>'+plVal.product_details.mrp_price+'</td>'+
                             '<td>'+plVal.product_details.quantity+'</td>'+
-                            '<td>'+plVal.rln_pro_cat.category.cat_name+'</td>'+
+                            '<td>'+plVal.rln_pro_cat.category.ser_name+'</td>'+
                             '<td>'+$brand_id+'</td>'+
                             '<td>'+plVal.detail+'</td>'+
                         '</tr>';
@@ -547,7 +547,7 @@ $(document).ready(function() {
                             '<td>'+plVal.product_details.price+'</td>'+
                             '<td>'+plVal.product_details.mrp_price+'</td>'+
                             '<td>'+plVal.product_details.quantity+'</td>'+
-                            '<td>'+plVal.rln_pro_cat.category.cat_name+'</td>'+
+                            '<td>'+plVal.rln_pro_cat.category.ser_name+'</td>'+
                             '<td>'+$brand_id+'</td>'+
                             '<td>'+plVal.detail+'</td>'+
                         '</tr>';

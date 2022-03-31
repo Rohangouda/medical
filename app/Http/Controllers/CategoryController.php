@@ -16,7 +16,7 @@ class CategoryController extends Controller
         $mst_query = Mst_Category::query();
         $mst_query = Mst_Category::whereNull('deleted_at');
         if(!empty($data['search_text'])){
-            $mst_query->where('cat_name','LIKE','%'.$data['search_text'].'%');
+            $mst_query->where('ser_name','LIKE','%'.$data['search_text'].'%');
         }
         $mst_query->orderBy('id','DESC'); 
         $get_records = $mst_query->paginate($data['perPage']);
@@ -32,16 +32,16 @@ class CategoryController extends Controller
     {
         // dd($req);
         // dd(session::get('user_id'));
-        $name = strtolower($req->cat_name);
-        $req->cat_name = ucfirst($name);
+        $name = strtolower($req->ser_name);
+        $req->ser_name = ucfirst($name);
         $req->validate([
-            'cat_name'=>'required|unique:mst_categories'
+            'ser_name'=>'required|unique:mst_services'
         ]);
 
 
         DB::transaction(function () use ($req) {
                 $brand_name = new Mst_Category();
-                $brand_name->cat_name=$req->cat_name;
+                $brand_name->ser_name=$req->ser_name;
                 $brand_name->service_id=$req->service_id;
                 $brand_name->tags=$req->tag;
                 $brand_name->level=1;
@@ -49,7 +49,7 @@ class CategoryController extends Controller
                 $brand_name->save();
         });
         
-        return redirect()->back()->with('message','Category has been created successfully!');
+        return redirect()->back()->with('message','Service has been created successfully!');
 
     }
 
@@ -65,26 +65,26 @@ class CategoryController extends Controller
     
     public function update(Request $request)
     {
-        $request->validate([  
-        'cat_name'=>'required|unique:mst_categories',  
+        // $request->validate([  
+        // 'ser_name'=>'required|unique:mst_services',  
           
-        ]);
+        // ]);
         //  [
-        //     'cat_name.required'=> 'Category Name Required*'
+        //     'ser_name.required'=> 'Category Name Required*'
         //  ]);
         // dd($request);
         $id = $req->id;
         if (Mst_Category::find($id)->update($request->all()))
         {
-            return redirect()->back()->with('message', 'Category Name updated successfully!');
+            return redirect()->back()->with('message', 'Service Name updated successfully!');
         }   
-        return Redirect::back()->with('messagered', 'Category Name updation Failed!');
+        return Redirect::back()->with('messagered', 'Service Name updation Failed!');
     }
 
     public function delete_record(Request $request)
     {
         if(Mst_Category::where('id', $request->id)->delete()){
-            return response()->json(['status' => 200, 'msg' => 'Category deleted successfully!']);
+            return response()->json(['status' => 200, 'msg' => 'Service deleted successfully!']);
         }else {     
             return response()->json(['status' => 500, 'messagered' => 'Something went wrong, try again after some time']);
         }

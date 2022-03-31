@@ -13,9 +13,9 @@ class CreateMstCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('mst_categories', function (Blueprint $table) {
+        Schema::create('mst_services', function (Blueprint $table) {
             $table->id();
-            $table->string('cat_name');
+            $table->string('ser_name');
             $table->string('level');
             $table->Integer('rel_id')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
@@ -31,6 +31,6 @@ class CreateMstCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mst_categories');
+        Schema::dropIfExists('mst_services');
     }
 }

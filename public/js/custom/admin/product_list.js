@@ -162,7 +162,7 @@ $(document).ready(function() {
                             '<td> <input type="text" class="form-control" id="tbl_price_'+plVal.id+'" name="tbl_price_'+plVal.id+'" value='+plVal.product_details.price+'><div class="error" id="tbl_price_err" style="display:none;font-size:14px;color:red;"></div><button type="button" class="btn btn-sm btn-primary productDetailsUpdateBtn"  data-product_id = '+plVal.id+' data-column_name = "price" style="margin-top:5px;">update</button></td>'+
                             '<td> <input type="text" class="form-control" id="tbl_mrp_price_'+plVal.id+'" name="tbl_mrp_price_'+plVal.id+'" value='+plVal.product_details.mrp_price+'><div class="error" id="tbl_mrp_price_err" style="display:none;font-size:14px;color:red;"></div><button type="button" class="btn btn-sm btn-primary productDetailsUpdateBtn" data-product_id = '+plVal.id+' data-column_name = "mrp_price" style="margin-top:5px;">update</button></td>'+
                             '<td> <p>In-stoke : '+plVal.product_details.quantity+' <button type="button" class="btn btn-sm btn-info updateQuantityBtnInitial" data-update_qunatity='+plVal.id+'><i class="fa fa-plus" aria-hidden="true"></i></button></p><input type="text" style="display:none;" class="form-control tbl_quantity_cls" id="tbl_quantity_'+plVal.id+'" name="tbl_quantity_'+plVal.id+'"><div class="error" id="tbl_quantity_err" style="display:none;font-size:14px;color:red;"></div><center><button type="button" id="Initial_'+plVal.id+'" style="display:none;" class="btn btn-sm btn-primary productDetailsUpdateBtn" data-product_id = '+plVal.id+'  data-column_name = "quantity" style="margin-top:5px;">update</button></center></td>'+
-                            '<td>'+plVal.rln_pro_cat.category.cat_name+'</td>'+
+                            '<td>'+plVal.rln_pro_cat.category.ser_name+'</td>'+
                             '<td>'+$brand_id+'</td>'+
                             '<td>'+plVal.detail+'</td>'+
                         '</tr>';
@@ -763,7 +763,7 @@ $(document).ready(function() {
                             '<td>'+plVal.product_details.price+'</td>'+
                             '<td>'+plVal.product_details.mrp_price+'</td>'+
                             '<td>'+plVal.product_details.quantity+'</td>'+
-                            '<td>'+plVal.rln_pro_cat.category.cat_name+'</td>'+
+                            '<td>'+plVal.rln_pro_cat.category.ser_name+'</td>'+
                             '<td>'+$brand_id+'</td>'+
                             '<td>'+plVal.detail+'</td>'+
                         '</tr>';
@@ -774,7 +774,7 @@ $(document).ready(function() {
                             '<td>'+plVal.product_details.price+'</td>'+
                             '<td>'+plVal.product_details.mrp_price+'</td>'+
                             '<td>'+plVal.product_details.quantity+'</td>'+
-                            '<td>'+plVal.rln_pro_cat.category.cat_name+'</td>'+
+                            '<td>'+plVal.rln_pro_cat.category.ser_name+'</td>'+
                             '<td>'+$brand_id+'</td>'+
                             '<td>'+plVal.detail+'</td>'+
                         '</tr>';

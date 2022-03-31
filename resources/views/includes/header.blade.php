@@ -49,7 +49,7 @@
                       class="fas fa-search"></i></button>
                 </div>
               </div> --}}
-            </li>
+            </li>php artisan sem_remove
           </ul>
           <div class="user_option-box">
             @if(Session::has('user_id'))

@@ -6,14 +6,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Mst_Brand extends Model
+class Banner extends Model
 {
     use SoftDeletes;
 
-    protected $table = "mst_brands";
+    protected $table = "banner";
 
     protected $fillable =[
-        'brand_name',
+        'service_name',
+        'tittle',
+        'description',
         'updated_by'
     ];
 }

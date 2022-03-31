@@ -28,7 +28,7 @@ class HomeController extends Controller
         $mst_query = Mst_Category::query();
         $mst_query = Mst_Category::whereNull('deleted_at');
         if(!empty($data['search_text'])){
-            $mst_query->where('cat_name','LIKE','%'.$data['search_text'].'%');
+            $mst_query->where('ser_name','LIKE','%'.$data['search_text'].'%');
         }
         $mst_query->orderBy('id','DESC'); 
         $get_records = $mst_query->get();
@@ -41,7 +41,7 @@ class HomeController extends Controller
 
     public function themeCategories(Request $req){
         $data = $req->all();
-        $res = Mst_Category::orderBy('cat_name','ASC')->paginate($data['perPage']);
+        $res = Mst_Category::orderBy('ser_name','ASC')->paginate($data['perPage']);
         if($res != null){
             return response()->json(['status' => 200, 'category_list' => $res]);
         }else {
@@ -194,7 +194,7 @@ class HomeController extends Controller
         // print_r('per page : '.$perPage);die;
         if(!empty($req->search_text)){
             $result=[];
-            $mst_category = Mst_Category::where('cat_name','LIKE','%'.trim($req->search_text).'%')->get();
+            $mst_category = Mst_Category::where('ser_name','LIKE','%'.trim($req->search_text).'%')->get();
             // print_r($mst_category->toArray());die;
             if(count($mst_category) > 0){
                 $result['category_wise_product'] = [];
