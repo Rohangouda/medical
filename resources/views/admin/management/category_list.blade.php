@@ -125,13 +125,11 @@ input[type=file] {
                     @csrf
                     <div class="form-group">
                         <label>Service*</label>
-                        <select type="text" id="" class="form-control" 
-                             style="background-color: white;" >
-                            <option></option>
-                        </select>
+                        <select class="action form-control" id="service"  name="service_id" onchange="change(value)"
+                             style="background-color: white;"></select>
                     </div>
                     <div class="form-group">
-                        <label>Page name*</label>
+                        <label>Page URL*</label>
                         <input type="text" id="cat_name" class="form-control" name="cat_name"
                             placeholder="Enter page Name" style="background-color: white;" required>
                     </div>
@@ -140,11 +138,10 @@ input[type=file] {
                         <input type="text" id="tag" class="form-control" name="tag"
                             placeholder="Enter Tags" style="background-color: white;" >
                     </div>
-                    {{-- <div class="form-group text-center">
-                        <img class="my-2" id="blah" src="{{ asset('images/product.png') }}" alt="your image" />
+                    <!-- <div class="form-group text-center">
+                        <img class="my-2" id="blah" src="{{ asset('medfin/favicon.png') }}" alt="your image" />
                         <input type='file' name="image" onchange="readURL(this);" class="form-control" />
-                    </div> --}}
-
+                    </div> -->
                     <div class="text-center">
                         <input type="submit" class="btn btn-info" value="Submit" name="submit">
                     </div>
@@ -172,7 +169,6 @@ input[type=file] {
                         <input type="text" class="form-control" id="edit-title" name="cat_name"
                             style="background-color: white;">
                     </div>
-                    
             <div class="text-center">
                 <input type="submit" class="btn btn-info btn-lg" value="Update" name="Update">
             </div>
@@ -199,53 +195,29 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-// $(document).ready(function() {
-
-//     $('.edit').on('click', function() {
-        // let id = $(this).attr("data-id");
-        // let title = $('#title-' + id).text();
-        // // let description = $('#description-' + id).text();
-        // let url = "{{url('/update-category')}}/" + id;
-        // $('#edit-title').val(title);
-        // // $('#edit-description').val(description);
-        // $('#updateUrl').attr('action', url);
-//     });
-
-//     $('.delete').on('click', function() {
-//         if (confirm('Are you sure you want to Delete Category ?')) {
-//             var id = $(this).attr('data-id');
-//             $.ajax({
-//                 url: "{{url('/category_delete_modal')}}",
-//                 method: "POST",
-//                 data: {
-//                     "_token": "{{ csrf_token() }}",
-//                     "id": id
-//                 },
-               
-//             }).done(function(msg) {
-//                 if (msg.type == 'success') {
-//                     alert(msg.message);
-//                     location.reload();
-//                 } else {
-//                     alert(msg.message);
-//                     //$('.error-favourite-message').html(msg.message);
-//                 }
-//             });
-//         } else {
-//             return false;
-//         }
-//     });
-//     @if(Session::has('message'))
-//     setTimeout(function() {
-//         $('.alert').fadeOut('fast')
-//     }, 5000); // <-- time in milliseconds
-//     @endif
-
-//     @if($errors -> any())
-//     setTimeout(function() {
-//         $('.alert').fadeOut('fast')
-//     }, 1300); // <-- time in milliseconds
-//     @endif
-// });
+</script>
+<script type="text/javascript">
+    var url = "https://services.medfin.in/catalog/v3/city-service-list";
+    var serviceId, serviceName;
+    var xhr;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var res = JSON.parse(xhr.responseText),
+                data = res.data;
+            for(var i = 0; i < data.length; i++) {
+                var ele = document.createElement("option");
+                ele.value = data[i].serviceId;
+                ele.innerHTML = data[i].serviceName;
+                document.getElementById("service").appendChild(ele);
+            }
+        }
+    }
+    xhr.open("GET", url, true);
+    xhr.send();
 </script>
 @stop

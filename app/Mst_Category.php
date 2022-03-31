@@ -14,6 +14,8 @@ class Mst_Category extends Model
     
     protected $fillable =[
         'cat_name',
+        'service_id',
+        'tags',
         'level',
         'rel_id'
     ];

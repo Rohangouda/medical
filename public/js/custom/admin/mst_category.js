@@ -31,6 +31,7 @@ $(document).ready(function () {
             success: function (res) {
                 if (res.status == 200) {
                     let x = '';
+<<<<<<< HEAD
                     $.each(res.category_list.data, function (lKey, lVal) {
                         x += '<tr>' +
                             '<td>' + parseInt(lKey + 1) + '</td>' +
@@ -43,6 +44,20 @@ $(document).ready(function () {
                         x += '<td class="text-truncate"><button type="button" class="btn btn-sm btn-primary edit_category_detail" data-category_id=' + lVal.id + '><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button> ' +
                             ' <button type="button" class="btn btn-sm btn-danger delete_category" data-category_id=' + lVal.id + '><i class="fa fa-trash" aria-hidden="true"></i></button></td>' +
                             '</tr>';
+=======
+                    $.each(res.category_list.data, function(lKey, lVal){
+                        x += '<tr>'+
+                            '<td>'+parseInt(lKey+1)+'</td>'+
+                            '<td>'+lVal.cat_name+'</td>';
+                            if(lVal.image != null){
+                                x += '<td><img src="'+baseUrl+'/storage/category/'+lVal.image+'" class="img-thumbnail" style="max-height:60px;"></td>';
+                            }else {
+                                x += '<td><img src="'+baseUrl+'/medfin/favicon.png" class="img-thumbnail" style="max-height:60px;"></td>';
+                            }
+                            x+= '<td class="text-truncate"><button type="button" class="btn btn-sm btn-primary edit_category_detail" data-category_id='+lVal.id+'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button> ' +
+                            ' <button type="button" class="btn btn-sm btn-danger delete_category" data-category_id='+lVal.id+'><i class="fa fa-trash" aria-hidden="true"></i></button></td>'+
+                        '</tr>';
+>>>>>>> origin/rohan
                     });
                     $('#category_list').html(x);
                     $('.js_pagination_append').html(res.pagination);
@@ -68,7 +83,9 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on('click', '.edit_category_detail', function () {
+
+
+    $(document).on('click','.edit_category_detail', function() {
         let edit_id = $(this).data('category_id');
         if (edit_id != '') {
             $.ajax({
@@ -163,3 +180,5 @@ $(document).ready(function () {
     });
 
 });
+
+

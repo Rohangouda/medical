@@ -105,25 +105,25 @@ $(document).ready(function() {
                 }
                 if (pointer == 5) {
                     $("#id4").hide();
-                    $("#id4").find('img').attr('src',"{{asset('images/product.png')}}");
+                    $("#id4").find('img').attr('src',"{{asset('medfin/favicon.png')}}");
                     $("#id4").find('#input5').val("");
                     pointer = 4;
                 }
                 else if (pointer == 4) {
                     $("#id3").hide();
-                    $("#id3").find('img').attr('src',"{{asset('images/product.png')}}");
+                    $("#id3").find('img').attr('src',"{{asset('medfin/favicon.png')}}");
                     $("#id3").find('#input4').val("");
                     pointer = 3;
                 }
                 else if (pointer == 3) {
                     $("#id2").hide();
-                    $("#id2").find('img').attr('src',"{{asset('images/product.png')}}");
+                    $("#id2").find('img').attr('src',"{{asset('medfin/favicon.png')}}");
                     $("#id2").find('#input3').val("");
                     pointer = 2;
                 }
                 else if (pointer == 2) {
                     $("#id1").hide();
-                    $("#id1").find('img').attr('src',"{{asset('images/product.png')}}");
+                    $("#id1").find('img').attr('src',"{{asset('medfin/favicon.png')}}");
                     $("#id1").find('#input2').val("");
                     pointer = 1;
                 }

@@ -41,9 +41,10 @@ class PageController extends Controller
         return view('pages.landing.all_list', $result);
     }
     
-    public function shopByCategory()
+    public function shopByCategory($id)
     {
         $result['page_title'] = 'Medfin || Service-list';
+        $result['service'] = Mst_Category::where('cat_name',$id)->first();
         return view('pages.landing.all_list', $result);
     }
 

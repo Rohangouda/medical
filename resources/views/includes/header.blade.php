@@ -52,12 +52,6 @@
             </li>
           </ul>
           <div class="user_option-box">
-            {{-- <div class="col-sm-6 my-2">
-              <div class="input-group">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search">
-                <button type="button" class="btn btn-outline-primary">Search</button>
-              </div>
-            </div> --}}
             @if(Session::has('user_id'))
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
@@ -94,12 +88,6 @@
               id="login_head_btn">Login
             </button>
             @endif
-
-            <!-- <button type="button" class="btn btn-outline-success" style="border-radius: 5px" data-toggle="modal"
-              data-target="#modalCookie1">
-              <i class="fa fa-cart-plus" aria-hidden="true"> </i>
-              <span class="notification badge badge-pill badge-danger cartCount"></span>
-            </button> -->
           </div>
         </div>
       </nav>
