@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Validator;
 use App\Banner;
 use App\Overview;
+use DB;
 
 class ContentController extends Controller
 {
@@ -30,6 +31,28 @@ class ContentController extends Controller
             //         ->withErrors($query)
             //         ->withInput();
             
+    //       DB::transaction(function () use ($req) { 
+
+    //         $var = Overview::create([ 
+    //             'service_name'=>$req->service_name,
+    //             'tittle'=>$req->banner_tittle,
+    //             'description'=>$req->overview_description,
+    //             'created_at' => date('Y-m-d H:i:s'),
+    //             'updated_at' => date('Y-m-d H:i:s'),
+    //             'Deactivate'=>'0'
+    //             ]);
+    //             $var->save();
+
+    //             $var1 = Banner::create([ 
+    //             'service_name'=>$req->service_name,
+    //             'tittle'=>$req->overview_tittle,
+    //             'description'=>$req->banner_description,
+    //             'created_at' => date('Y-m-d H:i:s'),
+    //             'updated_at' => date('Y-m-d H:i:s'),
+    //             'Deactivate'=>'0'
+    //             ]);
+    //             $var1->save();
+    // });
         $brand_name = new Banner();
         $brand_name->service_name=$req->service_name;
         $brand_name->tittle=$req->banner_tittle;
@@ -40,6 +63,24 @@ class ContentController extends Controller
    
     if($brand_name){
           return redirect()->back()->with('message',' Content has been created successfully!');
+    }else {     
+        return redirect()->back()->with('messagered',' Something went wrong, try again');
+    }
+    }
+
+    public function create_overview(Request $req)
+    {
+    //  dd($req);
+ 
+                $content = Overview::create([ 
+                'service_name'=>$req->service_name,
+                'tittle'=>$req->overview_tittle,
+                'description'=>$req->overview_description,
+                'Deactivate'=>'0'
+                ]);
+
+    if($content){
+          return redirect()->back()->with('message',' Overview Content has been created successfully!');
     }else {     
         return redirect()->back()->with('messagered',' Something went wrong, try again');
     }
@@ -59,25 +100,3 @@ class ContentController extends Controller
 
 
             
-    //     DB::transaction(function () use ($req) { 
-
-    //         $var = Overview::create([ 
-    //             'service_name'=>$req->service_name,
-    //             'tittle'=>$req->banner_tittle,
-    //             'description'=>$req->overview_description,
-    //             'created_at' => date('Y-m-d H:i:s'),
-    //             'updated_at' => date('Y-m-d H:i:s'),
-    //             'Deactivate'=>'0'
-    //             ]);
-    //             $var->save();
-
-    //             $var = Banner::create([ 
-    //             'service_name'=>$req->service_name,
-    //             'tittle'=>$req->overview_tittle,
-    //             'description'=>$req->banner_description,
-    //             'created_at' => date('Y-m-d H:i:s'),
-    //             'updated_at' => date('Y-m-d H:i:s'),
-    //             'Deactivate'=>'0'
-    //             ]);
-    //             $var->save();
-    // });

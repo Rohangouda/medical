@@ -113,7 +113,7 @@ Route::group(['middleware'=>['LoginCheck']],function(){
             Route::post('/register/content','ContentController@create_banner')->name('master.banner');
             // Route::post('/update/content','ContentController@update_content')->name('update.content');
             // Route::post('/delete/content','ContentController@delete_content')->name('delete.content');
-            Route::post('/register/content','ContentController@create_banner')->name('master.banner');
+            Route::post('/register/content/overview','ContentController@create_overview')->name('master.overview');
 
         //---- Order Management
         Route::get('/admin/order-list','PageController@orderList');
