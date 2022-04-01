@@ -63,7 +63,7 @@ input[type=file] {
                                                             <tr role="row">
                                                                 <th>#</th>
                                                                 <th>NAME</th>
-                                                                <th>IMAGE</th>
+                                                                {{-- <th>IMAGE</th> --}}
                                                                 <th>ACTION</th>
                                                             </tr>
                                                         </thead>

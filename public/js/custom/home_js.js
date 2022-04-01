@@ -36,7 +36,6 @@ $(document).ready(function () {
                             'View Page ' +
                             '</span>' +
                             '<i class="fa fa-long-arrow-right" aria-hidden="true"></i>' +
-
                             '</div>' +
                             '</a>' +
                             '</div>' +
