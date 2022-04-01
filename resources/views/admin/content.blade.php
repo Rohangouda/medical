@@ -94,10 +94,19 @@
                                     </div>
                                 </form>
                                 <!---overview-->
+                                
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                         <div class="card">
                                             <div class="card-header">
+                                                <form action="{{route('master.overview')}}" method="POST">
                                                 <h4 class="card-title btn btn-primary">Overview</h4>
+                                                <input list="magicHouses" id="myHouse" name="service_name" placeholder="type here..." />
+                                                    <datalist id="magicHouses">
+                                                    @foreach($service as $ser)
+                                                    <option value="{{$ser->ser_name}}">{{$ser->ser_name}}</option>
+                                                    @endforeach
+
+                                                </datalist>
                                             </div>
                                             <div class="card-content">
                                                 <div class="card-body">
@@ -128,15 +137,20 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="text-center">
+                                                                <button type="submit" class="btn btn-primary"><i
+                                                                        class="ft-check mr-2"></i>Save Change</button>
+                                                            </div>
                                                         </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </form>
                                 </div>
                             </section>
                             <!-- CTreatment option start -->
-                            <!-- <section id="sizing">
+                            <section id="sizing">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12">
                                         <div class="card">
@@ -200,7 +214,7 @@
                                         </div>
                                     </div>
                                 <!---Causes & symptoms-->
-                               <!-- <div class="col-lg-6 col-md-12 col-sm-12">
+                                   <div class="col-lg-6 col-md-12 col-sm-12">
                                         <div class="card">
                                             <div class="card-header">
                                                 <h4 class="card-title btn btn-primary">Causes & Symptoms</h4>
@@ -261,7 +275,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </section> -->
+                            </section>
                              <!-- Causes & symptoms end -->
                              <div class="text-center">
                                 <button type="submit" class="btn btn-primary btn-block my-5"><i

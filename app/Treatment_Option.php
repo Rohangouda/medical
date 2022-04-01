@@ -18,6 +18,7 @@ class Overview extends Model
         'acc_tittle_to',
         'bullet_tittle_to',
         'bullet_content_to',
-        'acc_content_to'
+        'acc_content_to',
+        'Deactivate'
     ];
 }
