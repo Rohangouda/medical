@@ -53,18 +53,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link " href="{{ URL::to('/') }}">Home <span
+                            <a class="nav-link " href="{{ URL::to('/') }}"><span
                                     class="sr-only">(current)</span></a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link " href="{{route('product')}}"> Products </a>
-                        </li> --}}
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link " href="{{ route('about_us') }}"> About Us </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="{{ route('contact') }}">Contact Us</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item my-2 m-md-0">
 
                             {{-- <div class="input-group ">
@@ -83,14 +80,7 @@
                         </li>
 
                     </ul>
-                    <div class="user_option-box">
-                        {{-- <div class="col-sm-6 my-2">
-                            <div class="input-group">
-                                <input type="search" class="form-control rounded" placeholder="Search"
-                                    aria-label="Search" <button type="button"
-                                    class="btn btn-outline-primary">Search</button>
-                            </div>
-                        </div> --}}
+                    <div class="user_option-box mr-5">
                         @if (Session::has('user_id'))
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
@@ -254,7 +244,7 @@
         $('#global_search_btn').click(() => {
             let search_text = $('#global_search_text').val();
             if (search_text != '') {
-                window.open(baseUrl + '/search-in-peepal-store/' + search_text, '_self');
+                window.open(baseUrl + '/search-in-medfin/' + search_text, '_self');
             }
         });
     });

@@ -16,6 +16,6 @@ class Banner extends Model
         'service_name',
         'tittle',
         'description',
-        'updated_by'
+        'Deactivate'
     ];
 }

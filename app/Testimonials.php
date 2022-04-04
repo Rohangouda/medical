@@ -5,16 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UsersCart extends Model
+class Testimonials extends Model
 {
     use SoftDeletes;
 
-    protected $table = "users_cart";
+    protected $table = "testimonials";
 
     protected $fillable =[
-        'user_id',
-        'product_id',
-        'quantity',
-        'updated_by'
+        'name',
+        'message',
+        'city',
+        'Deactivate'
     ];
 }

@@ -1,32 +1,31 @@
+<script src="https://kit.fontawesome.com/66aa7c98b3.js" crossorigin="anonymous"></script>
+<style>
+.icons{
+    padding-top: 1rem;
+}
+
+.icons a{
+    text-decoration: none;
+    font-size: 1.5rem;
+    margin: 0.5rem;
+    color: black;
+}
+  </style>
 <!--Footer Starts-->
-<footer class="container-fluid footer">
+<footer class="container-fluid footer ">
     <div class="container">
 		<div class="row text-center">
 			<div class="col-12 footer-links">
-				<a href="javascript:void(0)">About Medfin</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">Terms and Conditions</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">FAQs</a>
+				<a href="https://www.medfin.in/about-medfin" target="_blank">About Medfin</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/privacy-policy" target="_blank">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/terms-conditions" target="_blank">Terms and Conditions</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/contact-us" target="_blank">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/faq" target="_blank">FAQs</a>
 			</div>
 			<div class="col-12 social-icons-sec">
-				<ul class="list-unstyled list-inline social-icons">
-						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-fb">
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-twt">
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-gpls">
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-insta">
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-ytb">
-							</a>
-						</li>
+          <div class="icons">
+           <a href="https://m.facebook.com/medfinhealth" target="_blank"><i class="fab fa-facebook"></i></a>
+           <a href="#"><i class="fab fa-linkedin"></i></a>
+           <a href="https://www.instagram.com/medfin_health/" target="_blank"><i class="fab fa-instagram"></i></a>
+           <a href="https://youtube.com/c/Medfinhealth" target="_blank"><i class="fab fa-youtube"></i></a>
+           <a href="http://twitter.com/medfinhealth" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
 					</ul>
 			</div>
 		</div>
@@ -34,7 +33,7 @@
         
     </div>
         
-    <div class="text-center footer-rights">
+    <div class="text-center footer-rights mb-5">
         © Medfin 2019. All Rights Reserved.
     </div>
 </footer>
