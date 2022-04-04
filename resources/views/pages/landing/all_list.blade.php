@@ -5,17 +5,100 @@
 <title>Medfin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
+<link rel="shortcut icon" href="{{ asset('medfin/favicon.png') }}" type="image/x-icon">
 <link href="{{ asset('medfin/css/bootstrap.min.css') }}"  rel="stylesheet">
 <link href="{{ asset('medfin/css/lp-15.css') }}"  rel="stylesheet">
 <link href="{{ asset('medfin/css/swiper-min.css') }}"  rel="stylesheet">
+<script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 <script src="{{asset('js/custom/users/all_product_details.js?var=')}}{{date('YmdHis')}}"></script>
+<script src="https://use.fontawesome.com/47886b77a3.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+     alpha/css/bootstrap.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	<style>
+    .toggle-box-region {background-color:#fff; border:1px solid #d9d9d9; padding:16px 18px;}
+.toggle-box {display:none;}
+.toggle-box + label {
+	color:#555;
+	cursor:pointer;
+	display:block;
+	font-weight:bold;
+	line-height:23px;
+	padding:.3em 0 .3em 26px;
+	position:relative;
+}
+
+.toggle-box + label + div {display:none; margin:0 0 14px;}
+.toggle-box:checked + label:nth-child(n) + div {display:block;}
+
+.toggle-box + label:before {
+	position:absolute;
+	content:"\f0fe";
+	font-family:FontAwesome;
+	top:.3em;
+	left:0px;
+	color:#0085a6;
+}
+.toggle-box:checked + label {color:#0085a6;}
+.toggle-box:checked + label:before {content:"\f146";}
+.toggle-box-content {border-bottom:4px double #bfbfbf; color:#000; padding:2px 1em .6em 28px;}
+
+/* General */
+*, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+			box-sizing: border-box;
+}
+.box-test {
+  padding:3em;
+}
+    </style>
 </head>
 <body>
+<script>
+  @if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif
+
+  @if(Session::has('error'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.error("{{ session('error') }}");
+  @endif
+
+  @if(Session::has('info'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.info("{{ session('info') }}");
+  @endif
+
+  @if(Session::has('status'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.warning("{{ session('status') }}");
+  @endif
+</script>
 <!-- Navbar Starts -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
  <div class="container">
-	 <a class="navbar-brand" href="#banner"><img class="white-logo" src="{{ asset('medfin/images/medfin-logo-white.svg') }}" height="27" alt=""/><img class="blue-logo" src="images/medfin-logo.svg" height="27" alt=""/></a>
+	 <a class="navbar-brand" href="{{URL::to('/')}}"><img class="white-logo" src="{{ asset('medfin/images/medfin-logo-white.svg') }}" height="27" alt=""/><img class="blue-logo" src="images/medfin-logo.svg" height="27" alt=""/></a>
   <form class="form-inline my-2 my-lg-0">
 	<a class="btn btn-call" href="tel:7026-200-200"><span class="btn-call-icon"></span> 7026-200-200</a>
   
@@ -44,7 +127,8 @@
 </div>
 </nav>
 <!-- Navbar Ends -->
-@if (!empty($banner))	
+@if (!empty($banner))
+@if ($banner->Deactivate == 0)	
 <div style="background-color: #fff;" class="container-fluid navbar-positioning"></div>
 
 <!-- Banner Ends -->
@@ -67,7 +151,118 @@
 		
 	</div>
 </section>	
-@endif	
+@endif
+@endif
+@if(Session::get('user_role') == 'Admin')
+<!-- Banner edit  Starts -->
+<section id="about" class="container-fluid home-banner">
+	<div class="container align-items-center" id="myDIV">
+		<div class="row align-items-center">
+			<div class="col-md-5">
+				<div>
+                <form action="{{route('master.banner')}}"
+                method="POST"  enctype="multipart/form-data">
+                @csrf
+                <input type="text" name="id" value="{{$banner->Banner_ID ?? ''}}" hidden>
+				<input type="text" name="service_name" value="{{$service->ser_name ?? ''}}" hidden>
+                <!-- <img id="blah" @if($category[0]->image ?? '')  src="{{asset('/storage/slider')}}/{{$category[0]->image ?? ''}}" @else src="https://www.elegantthemes.com/blog/wp-content/uploads/2014/10/UploadLimit-Header.png" @endif  class="banner-img" style="width: 90%;">
+                <input type='file' name="image" onchange="readURL(this);" class="form-control" /> -->
+                <img src="{{asset('medfin/images/banner-img.jpg')}}" class="banner-img" width="99%">
+                </div>
+			</div>
+			<div class="col-md-5 banner-text">
+	
+				<input class="form-control mb-2"
+				name="banner_tittle" value="{{$banner->tittle ?? ''}}"
+				required>
+                <Textarea class="form-control"
+				name="banner_description"
+				required>{{$banner->description ?? ''}}</textarea>
+				<div class="text-center mt-3">
+                    <button type="submit" class="btn btn-success" >Update</button>
+			
+                </div>
+			</div>
+		   </form>
+		   @if (!empty($banner))
+		   <div class="col-md-2">
+		   @if ($banner->Deactivate == 1)
+						<button class="btn btn-sm shadow-sm btn-success text-nowrap" data-toggle="modal"
+							data-target="#activatemodal{{ $banner->Banner_ID ?? ''}}">
+							<i class="fas fa-power-off"></i> Activate
+						</button>
+					@else
+						<button class="btn btn-sm shadow-sm btn-danger text-nowrap" data-toggle="modal"
+							data-target="#deactivatemodal{{ $banner->Banner_ID ?? ''}}">
+							<i class="fas fa-times-circle"></i> Deactivate
+						</button>
+					@endif
+				</div>
+				{{-- Status Activate Modal --}}
+                            <div class="modal fade" id="activatemodal{{ $banner->Banner_ID ?? ''}}" tabindex="-1"
+                                role="dialog" aria-labelledby="#activatemodallabel{{ $banner->Banner_ID }}"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content modal-sm">
+                                        <div class="modal-body rounded">
+										<button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button><br>
+											<h5 class="text-primary">Are you Sure to Activate ?</h5>
+                                            <div class="group d-flex justify-content-center">
+                                                <form action="{{ route('/banner_status') }}" method="POST">
+                                                    @csrf
+                                                    <button type="button" class="btn-sm btn-danger"
+                                                        data-dismiss="modal">No</button>
+                                                    <input type="text" name="Banner_ID" value="{{ $banner->Banner_ID ?? '' }}"
+                                                        hidden>
+                                                    <input type="text" name="deactivate" value="Activate" hidden>
+                                                    <button type="submit" class="btn-sm btn-primary ml-2">Yes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- End of Activate Status modal --}}
+
+                            {{-- Status deactivate Modal --}}
+                            <div class="modal fade" id="deactivatemodal{{ $banner->Banner_ID }}" tabindex="-1"
+                                role="dialog" aria-labelledby="#deactivatemodallabel{{ $banner->Banner_ID }}"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body rounded">
+										<button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button><br>
+											<h5 class="text-primary">Are you Sure to Deactivate</h5>
+                                            <div class="group d-flex justify-content-center">
+                                                <form action="{{ route('/banner_status') }}" method="POST">
+                                                    @csrf
+                                                    <button type="button" class=" btn-sm btn-danger"
+                                                        data-dismiss="modal">No</button>
+                                                    <input type="text" name="Banner_ID" value="{{ $banner->Banner_ID ?? ''}}"
+                                                        hidden>
+                                                    <input type="text" name="deactivate" value="Deactivate" hidden>
+                                                    <button type="submit" class="btn-sm btn-primary ml-2">Yes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- End of deactivate Status modal --}}
+				@endif
+		</div>
+	</div>
+</section>
+
+
+<!--banner edit---->	
+@endif
 <!-- Top Form Starts -->
 <section class="container-fluid top-form d-none d-lg-block">
 	<div class="container">
@@ -150,7 +345,8 @@
 	</div>
 </section>
 <!-- USPs Ends -->
-	
+@if (!empty($overview))
+@if ($overview->Deactivate == 0)
 <!-- Why This Surgery Section Starts -->
 <section class="container-fluid why-this-surgery">
 <div class="container">	
@@ -159,23 +355,133 @@
 					<img src="{{ asset('medfin/images/why_surgery.jpg') }}" class="img-fluid">
 				</div>
 				<div class="col-md-6">
-					<h2>Why a Lasik Surgery?</h2>
+					<h2>{{$overview->tittle ?? '' }}?</h2>
 					<span class="hero d-md-none"><img src="images/why_surgery.jpg" class="img-fluid"></span>
-					<p>Here is why you should opt for a FEMTO Lasik surgery from Medfin.</p>
+					<!-- <p>Here is why you should opt for a FEMTO Lasik surgery from Medfin.</p>
 					<ul>
 						<li>Bladeless Lasik Surgery (FEMTO) that is highly precise</li>
 						<li>The minimal risk involved in the surgery</li>
 						<li>Extremely precise surgery performed by experienced surgeons</li>
 						<li>Fast recovery (within 2-3 days)</li>
 						<li>Surgery only takes 5-10 minutes to get completed</li>
-					</ul>
+					</ul> -->
+					{!! $overview->description ?? '' !!}
 				</div>
 	</div>
 </div>	
 </section>
+@endif
+@endif
+
 <!-- Why This Surgery Section Ends -->
-	
-	
+@if(Session::get('user_role') == 'Admin')
+<!-- Why This Surgery Section Starts edit-->
+<section class="container-fluid why-this-surgery">
+	<div class="container" id="myDIV">
+		
+	<div class="row">
+		<div class="col-md-5 hero d-none d-md-block">
+                <form action="{{route('master.overview')}}"
+                method="POST"  enctype="multipart/form-data">
+                @csrf
+                <input type="text" name="id" value="{{ $overview->Overview_ID  ?? '' }}" hidden>
+				<input type="text" name="service_name" value="{{$service->ser_name ?? ''}}" hidden>
+				
+                <!-- @if (Session::get('id'))
+                <img id="surgery" @if($surgery[0]->image ?? '')  src="{{asset('/storage/surgery')}}/{{$surgery[0]->image ?? ''}}" @else src="https://www.elegantthemes.com/blog/wp-content/uploads/2014/10/UploadLimit-Header.png" @endif  class="img-fluid" style="width: 90%;">
+                <input type='file' name="image" onchange="readURL(this);" class="form-control" />
+                @else -->
+                <!-- <img src="{{asset('medfin/images/banner-img.jpg')}}" class="img-fluid">
+                @endif -->
+					<img src="{{ asset('medfin/images/why_surgery.jpg') }}" class="img-fluid">
+		</div>
+		<div class="col-md-5">
+                <input class="form-control mb-2" name="overview_tittle" value="{{$overview->tittle ?? '' }}">
+                    <textarea name="overview_description" id="overview_description" placeholder="Enter Content" style="background-color: white;">{{$overview->description ?? '' }}</textarea>
+                    <div class="text-center mt-3">
+                      <button type="submit" class="btn btn-success" >Update</button>
+                    </div>  
+         </div>  
+                </form> 
+				@if (!empty($overview))
+				<div class="col-md-2">
+				@if ($overview->Deactivate == 1)
+						<button class="btn btn-sm shadow-sm btn-success text-nowrap" data-toggle="modal"
+							data-target="#activateoverview{{ $overview->Overview_ID }}">
+							<i class="fas fa-power-off"></i> Activate
+						</button>
+					@else
+						<button class="btn btn-sm shadow-sm btn-danger text-nowrap" data-toggle="modal"
+							data-target="#deactivateoverview{{ $overview->Overview_ID }}">
+							<i class="fas fa-times-circle"></i> Deactivate
+						</button>
+					@endif
+				</div>  
+				{{-- Status Activate Modal --}}
+                            <div class="modal fade" id="activateoverview{{ $overview->Overview_ID }}" tabindex="-1"
+                                role="dialog" aria-labelledby="#activateoverviewlabel{{ $overview->Overview_ID }}"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content modal-sm">
+                                        <div class="modal-body rounded">
+										<button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button><br>
+											<h5 class="text-primary">Are you Sure to Activate ?</h5>
+                                            <div class="group d-flex justify-content-center">
+                                                <form action="{{ route('/overview_status') }}" method="POST">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-info"
+                                                        data-dismiss="modal">No</button>
+                                                    <input type="text" name="Overview_ID" value="{{ $overview->Overview_ID }}"
+                                                        hidden>
+                                                    <input type="text" name="deactivate" value="Activate" hidden>
+                                                    <button type="submit" class="btn  btn-success ml-2">Yes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- End of Activate Status modal --}}
+
+                            {{-- Status deactivate Modal --}}
+                            <div class="modal fade" id="deactivateoverview{{ $overview->Overview_ID }}" tabindex="-1"
+                                role="dialog" aria-labelledby="#deactivateoverviewlabel{{ $overview->Overview_ID }}"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body rounded">
+										<button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button><br>
+											<h5 class="text-primary">Are you Sure to Deactivate</h5>
+                                            <div class="group d-flex justify-content-center">
+                                                <form action="{{ route('/overview_status') }}" method="POST">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-info"
+                                                        data-dismiss="modal">No</button>
+                                                    <input type="text" name="Overview_ID" value="{{ $overview->Overview_ID ?? '' }}"
+                                                        hidden>
+                                                    <input type="text" name="deactivate" value="Deactivate" hidden>
+                                                    <button type="submit" class="btn  btn-danger ml-2">Yes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- End of deactivate Status modal --}}
+				@endif               
+		</div>
+	</div>
+</div>	
+</section>
+
+<!-- Why This Surgery Section Ends -->	
+@endif	
 	
 	
 	
@@ -294,7 +600,6 @@
 								</div>
 								<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion2">
 								  <div class="card-body">
-									  
 									  <div class="row align-items-center">
 									  	<div class="col-12">
 											  <p>Here are some indicators that you might have a visual disorder:</p>
@@ -624,10 +929,7 @@
 <!-- Advantages Section Ends -->
 
 	
-	
-	
-	
-	
+@if (!empty($testimonial))
 <!--Testimonials Starts-->
 <div class="container-fluid testimonials-sec ash-bg">
 	<div class="container">
@@ -640,7 +942,26 @@
 			<div class="col-12">
 			<div class="swiper-container swiper-testimonials">
 			<div class="swiper-wrapper">
+			@foreach($testimonial as $key => $data)
 				<div class="swiper-slide">
+					<div class="row testimonials-outer">
+						<div class="col-12 p-0">
+							<div class="card">
+								  <div class="card-header text-left">
+									<img src="{{ asset('medfin/images/quote.svg') }}" height="22px">
+								  </div>
+								  <div class="card-body text-left">
+									  {{$data->message}}
+								  </div>
+								  <div class="card-footer text-left">
+								  {{$data->name}}<br><span style="color:#777777;">{{$data->city}}</span>
+								  </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			 @endforeach
+				<!-- <div class="swiper-slide">
 					<div class="row testimonials-outer">
 						<div class="col-12 p-0">
 							<div class="card">
@@ -656,8 +977,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="swiper-slide">
+				</div> -->
+				<!-- <div class="swiper-slide">
 					<div class="row testimonials-outer">
 						<div class="col-12 p-0">
 							<div class="card">
@@ -673,24 +994,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="row testimonials-outer">
-						<div class="col-12 p-0">
-							<div class="card">
-								  <div class="card-header text-left">
-									<img src="{{ asset('medfin/images/quote.svg') }}" height="22px">
-								  </div>
-								  <div class="card-body text-left">
-									  Thank you Medfin. They ensured the whole process from selecting a very experienced doctor to offering the latest procedure at a very reasonable price. They also arranged a follow up post my surgery with the doctor to ensure my recovery was on track. Thank you for being there throughout.
-								  </div>
-								  <div class="card-footer text-left">
-									Deepa Shree<br><span style="color:#777777;">Bangalore</span>
-								  </div>
-							</div>
-						</div>
-					</div>
-				</div>
+				</div> -->
 			
 			</div>
 
@@ -703,11 +1007,10 @@
 	</div>
 </div>
 <!--Testimonials Ends-->
+@endif		
 	
-	
-	
-	
-	
+@if (!empty($faq))
+@if ($faq->Deactivate == 0)			
 <!-- FAQ Section Starts -->
 <section class="container-fluid faq-sec">
 	<div class="container">
@@ -721,11 +1024,12 @@
 				</div>
 				<div class="col-md-6">
 					<div class="faq" id="accordion3">
+						@if(!empty($faq->que1))
 							  <div class="card">
 								<div class="card-header" id="headingSix">
 								  <h5 class="mb-0">
 									<button class="btn title collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-									  <h4>Is the outcome of a Lasik eye surgery permanent?</h4>
+									  <h4>{{$faq->que1}}?</h4>
 									  <div class="square">
 										<span class="plus-ico"></span>
 										<span class="minus-ico"></span>
@@ -738,19 +1042,20 @@
 									  
 									  <div class="row align-items-center">
 									  	<div class="col-12">
-											  <p>Yes, the outcome of the surgery is permanent as the vision defects in your eyes are corrected by reshaping the cornea.</p>
+											  <p>{{$faq->ans1}}</p>
 									  	</div>
 									  </div>
 									  
 								  </div>
 								</div>
 							  </div>
-
+							@endif
+							@if(!empty($faq->que2))
 							  <div class="card">
 								<div class="card-header" id="headingSeven">
 								  <h5 class="mb-0">
 									<button class="btn title collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSix">
-									  <h4>Is the Lasik procedure painful?</h4>
+									  <h4>{{$faq->que2}}?</h4>
 									  <div class="square">
 										<span class="plus-ico"></span>
 										<span class="minus-ico"></span>
@@ -763,16 +1068,15 @@
 									  
 									  <div class="row align-items-center">
 									  	<div class="col-12">
-											  <p>No, Lasik surgery is painless. Book your Lasik surgery through Medfin to get your eye disorder cured in under 30 minutes.
-
-</p>
+											  <p>No, Lasik surgery is painless. Book your Lasik surgery through Medfin to get your eye disorder cured in under 30 minutes.</p>
 									  	</div>
 									  </div>
 									  
 								  </div>
 								</div>
 							  </div>
-						
+							  @endif
+							  @if(!empty($faq->que3))
 							<div class="card">
 								<div class="card-header" id="headingEight">
 								  <h5 class="mb-0">
@@ -797,7 +1101,8 @@
 								  </div>
 								</div>
 							  </div>
-
+							  @endif
+                              @if(!empty($faq->que4))
 							  <div class="card">
 								<div class="card-header" id="headingNine">
 								  <h5 class="mb-0">
@@ -815,16 +1120,15 @@
 									  
 									  <div class="row align-items-center">
 									  	<div class="col-12">
-											  <p>No, Lasik surgery is painless. Book your Lasik surgery through Medfin to get your eye disorder cured in under 30 minutes.
-
-</p>
+											  <p>No, Lasik surgery is painless. Book your Lasik surgery through Medfin to get your eye disorder cured in under 30 minutes.</p>
 									  	</div>
 									  </div>
 									  
 								  </div>
 								</div>
 							  </div>
-						
+							  @endif
+							  @if(!empty($faq->que5))
 							<div class="card">
 								<div class="card-header" id="headingTen">
 								  <h5 class="mb-0">
@@ -849,6 +1153,7 @@
 								  </div>
 								</div>
 							  </div>
+							  @endif
 
 				</div>
 				</div>
@@ -857,33 +1162,137 @@
 	
 	</div>	
 </section>
+@endif
+@endif
 <!-- FAQ Section Ends -->
-@if(!empty($category))
-<section class="container-fluid faq-sec">
-	<div class="container">
-    @foreach ($category as $key => $value)
-<ul class="list-group">
-  <li class="list-group-item">{{$value->name}}</li>
-</ul>
-@endforeach
-</div>
-</section>
+@if(Session::get('user_role') == 'Admin')
+<!--Faq Section edit--->
+	<div class="container mb-4">
+	<form action="{{route('master.faq')}}" method="POST">
+	<div class="toggle-box-region"> 
+	<input type="text" name="id" value="{{$faq->Faq_ID ?? ''}}" hidden>
+	<input type="text" name="service_name" value="{{$service->ser_name ?? ''}}" hidden>
+		<input class="toggle-box" id="toggleId-1" type="checkbox">
+		<label for="toggleId-1">Click here to Question one!</label>
+		<div class="toggle-box-content">  <input type="text"  name="que1" class="form-control" placeholder="Enter Question" value="{{$faq->que1 ?? ''}}">
+         <textarea type="text"  name="ans1" class="form-control" placeholder="Enter Answer" >{{$faq->ans1 ?? ''}}</textarea></div>
+
+		<input class="toggle-box" id="toggleId-2" type="checkbox">
+		<label for="toggleId-2">Click here to Question two!</label>
+		<div class="toggle-box-content"> <input type="text"  name="que2" id="que1" class="form-control" value="{{$faq->que2 ?? ''}}" placeholder="Enter Question">
+        <textarea type="text"  name="ans2" id="ans2" class="form-control" placeholder="Enter Answer">{{$faq->ans2 ?? ''}}</textarea></div>
+
+		<input class="toggle-box" id="toggleId-3" type="checkbox">
+		<label for="toggleId-3">Click here to Question three!</label>
+		<div class="toggle-box-content">
+		<input type="text"  name="que3" id="que3" class="form-control" placeholder="Enter Question" value="{{$faq->que3 ?? ''}}">
+         <textarea type="text"  name="ans3" id="ans3" class="form-control" placeholder="Enter Answer">{{$faq->ans3 ?? ''}}</textarea>
+		</div>
+		
+		<input class="toggle-box" id="toggleId-4" type="checkbox">
+		<label for="toggleId-4">Click here to Question four!</label>
+		<div class="toggle-box-content"> <input type="text"  name="que4" id="que4" class="form-control" placeholder="Enter Question" value="{{$faq->que4 ?? ''}}">
+         <textarea type="text"  name="ans4" id="ans4" class="form-control" placeholder="Enter Answer">{{$faq->ans4 ?? ''}}</textarea></div>
+	     
+		<input class="toggle-box" id="toggleId-5" type="checkbox">
+		<label for="toggleId-5">Click here to Question Five!</label>
+		<div class="toggle-box-content"><input type="text"  name="que5" id="que5" class="form-control" placeholder="Enter Question" value="{{$faq->que5 ?? ''}}">
+         <textarea type="text"  name="ans5" id="ans5" class="form-control" placeholder="Enter Answer">{{$faq->ans4 ?? ''}}</textarea></div>
+	</div>
+	<div class="text-center">
+		<button type="submit" class="btn btn-primary mt-1">Update</button>
+	</div>
+    </form>
+	</div>
+	<div class="text-center mb-2">
+	@if (!empty($faq))
+		@if ($faq->Deactivate == 1 ?? '')
+						<button class="btn btn-sm shadow-sm btn-success text-nowrap" data-toggle="modal"
+							data-target="#activatfaq{{ $faq->Faq_ID ?? ''}}">
+							<i class="fas fa-power-off"></i> Activate
+						</button>
+					@else
+						<button class="btn btn-sm shadow-sm btn-danger text-nowrap" data-toggle="modal"
+							data-target="#deactivatefaq{{ $faq->Faq_ID ?? ''}}">
+							 Deactivate
+			</button>
+		@endif
+		{{-- Status Activate Modal --}}
+                            <div class="modal fade" id="activatfaq{{ $faq->Faq_ID}}" tabindex="-1"
+                                role="dialog" aria-labelledby="#activatfaqlabel{{ $faq->Faq_ID }}"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content modal-sm">
+                                        <div class="modal-body rounded">
+										<button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button><br>
+											<h5 class="text-primary">Are you Sure to Activate ?</h5>
+                                            <div class="group d-flex justify-content-center">
+                                                <form action="{{ route('/faq_status') }}" method="POST">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-info"
+                                                        data-dismiss="modal">No</button>
+                                                    <input type="text" name="Faq_ID" value="{{ $faq->Faq_ID }}"
+                                                        hidden>
+                                                    <input type="text" name="deactivate" value="Activate" hidden>
+                                                    <button type="submit" class="btn  btn-success ml-2">Yes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- End of Activate Status modal --}}
+
+                            {{-- Status deactivate Modal --}}
+                            <div class="modal fade" id="deactivatefaq{{ $faq->Faq_ID }}" tabindex="-1"
+                                role="dialog" aria-labelledby="#deactivatefaqlabel{{ $faq->Faq_ID }}"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body rounded">
+										<button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button><br>
+											<h5 class="text-primary">Are you Sure to Deactivate</h5>
+                                            <div class="group d-flex justify-content-center">
+                                                <form action="{{ route('/faq_status') }}" method="POST">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-info"
+                                                        data-dismiss="modal">No</button>
+                                                    <input type="text" name="Faq_ID" value="{{ $faq->Faq_ID ?? '' }}"
+                                                        hidden>
+                                                    <input type="text" name="deactivate" value="Deactivate" hidden>
+                                                    <button type="submit" class="btn  btn-danger ml-2">Yes</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- End of deactivate Status modal --}}
+		@endif
+				</div>
+<!--faq section end--->
 @endif	
 <!--Footer Starts-->
 <footer class="container-fluid footer">
     <div class="container">
 		<div class="row text-center">
 			<div class="col-12 footer-links">
-				<a href="javascript:void(0)">About Medfin</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">Terms and Conditions</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">FAQs</a>
+			<a href="https://www.medfin.in/about-medfin" target="_blank">About Medfin</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/privacy-policy" target="_blank">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/terms-conditions" target="_blank">Terms and Conditions</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/contact-us" target="_blank">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/faq" target="_blank">FAQs</a>
 			</div>
 			<div class="col-12 social-icons-sec">
 				<ul class="list-unstyled list-inline social-icons">
 						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-fb">
+							<a href="https://m.facebook.com/medfinhealth" target="_blank" class="social-fb">
 							</a>
 						</li>
 						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-twt">
+							<a href="http://twitter.com/medfinhealth" target="_blank" class="social-twt">
 							</a>
 						</li>
 						<li>
@@ -891,11 +1300,11 @@
 							</a>
 						</li>
 						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-insta">
+							<a href="https://www.instagram.com/medfin_health/" target="_blank" class="social-insta">
 							</a>
 						</li>
 						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-ytb">
+							<a href="https://youtube.com/c/Medfinhealth" target="_blank" class="social-ytb">
 							</a>
 						</li>
 					</ul>
@@ -1089,6 +1498,9 @@ var swiper = new Swiper('.swiper-testimonials', {
 //   var x = document.getElementById("myDIV");
 //   document.getElementById("myDIV").style.display = "block";
 // }
+CKEDITOR.replace( 'overview_description' );
+    CKEDITOR.replace( 'desc' );
     </script>
+	
 </body>
 </html>

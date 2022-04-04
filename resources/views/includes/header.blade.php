@@ -101,7 +101,7 @@
       $('#global_search_btn').click(() => {
         let search_text = $('#global_search_text').val();
         if(search_text != ''){
-          window.open(baseUrl + '/search-in-peepal-store/' + search_text, '_self');
+          window.open(baseUrl + '/search-in-medfin/' + search_text, '_self');
         }
         
       });

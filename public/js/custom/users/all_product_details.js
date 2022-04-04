@@ -38,7 +38,7 @@ $(document).ready(function () {
     _product_themes();
     let gsearch_click_count = 1;
 
-    if (uri_request == 'search-in-peepal-store') {
+    if (uri_request == 'search-in-medfin') {
         $('#global_search_text').val(uri_category);
         AllProductListByGlobalSearch($('#global_search_text').val(), gsearch_click_count);
     } else {

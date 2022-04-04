@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mst_Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Session;
+use Validator;
 use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
@@ -30,24 +32,29 @@ class CategoryController extends Controller
 
     public function create_category(Request $req)
     {
-        // dd($req);
+      
         // dd(session::get('user_id'));
-        $name = strtolower($req->ser_name);
-        $req->ser_name = ucfirst($name);
-        $req->validate([
+        // $name = strtolower($req->ser_name);
+        // $req->ser_name = ucfirst($name);
+        // $req->validate([
+        //     'ser_name'=>'required|unique:mst_services'
+        // ]);
+        $validator = Validator::make($req->all(), [
             'ser_name'=>'required|unique:mst_services'
         ]);
-
-
-        DB::transaction(function () use ($req) {
+          if($validator->fails()) {
+                    // return Redirect::back()->withErrors($validator);
+                    return Redirect::back()->with('messagered', $validator->errors());
+        }
+        $name = strtolower($req->ser_name);
+        $ser_name = Str::slug($name, '-');
                 $brand_name = new Mst_Category();
-                $brand_name->ser_name=$req->ser_name;
+                $brand_name->ser_name=$ser_name;
                 $brand_name->service_id=$req->service_id;
                 $brand_name->tags=$req->tag;
                 $brand_name->level=1;
                 $brand_name->updated_by=session::get('user_id');
                 $brand_name->save();
-        });
         
         return redirect()->back()->with('message','Service has been created successfully!');
 

@@ -136,7 +136,7 @@ input[type=file] {
                     <div class="form-group">
                         <label>Enter Tags*</label>
                         <input type="text" id="tag" class="form-control" name="tag"
-                            placeholder="Enter Tags" style="background-color: white;" >
+                            placeholder="Enter Tags" style="background-color: white;" required>
                     </div>
                     <!-- <div class="form-group text-center">
                         <img class="my-2" id="blah" src="{{ asset('medfin/favicon.png') }}" alt="your image" />

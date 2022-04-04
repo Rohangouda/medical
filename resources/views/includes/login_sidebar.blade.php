@@ -33,23 +33,17 @@
             <li><a href="{{URL('/admin/master-record/category-list')}}"><i class="ft-arrow-right submenu-icon"></i><span
                   class="menu-item" data-i18n="Grid">Master Service</span></a>
             </li>
-            <li><a href="{{ URL('/admin/product_list') }}"><i class="ft-arrow-right submenu-icon"></i><span
-                  class="menu-item" data-i18n="Syntax Highlighter">Content</span></a>
-            </li>
             <li><a href="{{ URL('/admin/content') }}"><i class="ft-arrow-right submenu-icon"></i><span
                   class="menu-item" data-i18n="Syntax Highlighter">Page Content</span></a>
             </li>
 
           </ul>
         </li>
-        <li class="nav-item"><a href="{{ URL('/admin/order-list')}}"><i class="ft-package"></i><span class="menu-title"
-              data-i18n="User/Staff">Order Management</span></a>
+        <li class="nav-item"><a href="{{ URL('/admin/testimonials')}}"><i class="ft-message-circle"></i><span class="menu-title"
+              data-i18n="User/Staff">Testimonials</span></a>
         </li>
-        <li class="nav-item"><a href="{{ URL('/admin/staff-users-list')}}"><i class="ft-user"></i><span
-              class="menu-title" data-i18n="User/Staff">User/Staff</span></a>
-        </li>
-        <li class="nav-item"><a href="{{ URL('/admin/all-enquiries')}}"><i class="ft-message-square"></i><span
-              class="menu-title" data-i18n="Enquiry">Enquiry</span></a>
+        <!-- <li class="nav-item"><a href="{{ URL('/admin/all-enquiries')}}"><i class="ft-message-square"></i><span
+              class="menu-title" data-i18n="Enquiry">Enquiry</span></a> -->
         </li>
       </ul>
     </div>

@@ -15,6 +15,9 @@ use Mockery\Undefined;
 use Session;
 use App\ThemeSlider;
 use App\Banner;
+use App\FAQ;
+use App\Overview;
+use App\testimonials;
 
 class PageController extends Controller
 {
@@ -42,11 +45,15 @@ class PageController extends Controller
         return view('pages.landing.all_list', $result);
     }
     
-    public function shopByCategory($id)
+    public function medfinpage($id)
     {
         $result['page_title'] = 'Medfin || Service-list';
         $result['service'] = Mst_Category::where('ser_name',$id)->first();
-        $result['banner'] = Banner::where('Deactivate',0)->where('service_name',$id)->first();
+        $result['banner'] = Banner::where('service_name',$id)->first();
+        $result['overview'] = Overview::where('service_name',$id)->first();
+        $result['faq'] = FAQ::where('service_name',$id)->first();
+        $result['testimonial'] = Testimonials::get();
+        
         return view('pages.landing.all_list', $result);
     }
 
@@ -67,33 +74,33 @@ class PageController extends Controller
         return view('admin/content',$result);
     }
     
-    public function StaffDashboard(){
-        $result['product_count'] = ProductHistory::get();
-        $result['total_sold_count'] = 0;
-        $result['total_sold_amount'] = 0;
-        $result['total_stock_count'] = 0;
-        $result['total_stock_amount'] = 0;
-        $result['total_hold_count'] = 0;
-        $result['total_hold_amount'] = 0;
-        foreach ($result['product_count']->where('order_status',1) as $key => $value) {
-           $result['total_stock_count'] += $value->quantity;
-           $result['total_stock_amount'] += $value->quantity*$value->price;
-        }
-        foreach ($result['product_count']->where('order_status',2) as $key => $value) {
-           $result['total_hold_count'] += $value->quantity;
-           $result['total_hold_amount'] += $value->quantity*$value->price;
-        }
-        foreach ($result['product_count']->where('order_status',3) as $key => $value) {
-           $result['total_sold_count'] += $value->quantity;
-           $result['total_sold_amount'] += $value->quantity*$value->price;
-        }
-        $result['product'] = Product::whereNull('deleted_at')->latest()->limit(5)->with('productExtraProp','productImagesByMaster')->get();
-        $result['user_count'] = User::where('role','user')->count();
-        $result['user'] = User::where('role','user')->latest()->limit(10)->get();
-        $result['staff_count'] = User::where('role','Staff')->count();
-        $result['page_title'] = 'Staff || Dashboard';
-        return view('admin/dashboard',$result);
-    }
+    // public function StaffDashboard(){
+    //     $result['product_count'] = ProductHistory::get();
+    //     $result['total_sold_count'] = 0;
+    //     $result['total_sold_amount'] = 0;
+    //     $result['total_stock_count'] = 0;
+    //     $result['total_stock_amount'] = 0;
+    //     $result['total_hold_count'] = 0;
+    //     $result['total_hold_amount'] = 0;
+    //     foreach ($result['product_count']->where('order_status',1) as $key => $value) {
+    //        $result['total_stock_count'] += $value->quantity;
+    //        $result['total_stock_amount'] += $value->quantity*$value->price;
+    //     }
+    //     foreach ($result['product_count']->where('order_status',2) as $key => $value) {
+    //        $result['total_hold_count'] += $value->quantity;
+    //        $result['total_hold_amount'] += $value->quantity*$value->price;
+    //     }
+    //     foreach ($result['product_count']->where('order_status',3) as $key => $value) {
+    //        $result['total_sold_count'] += $value->quantity;
+    //        $result['total_sold_amount'] += $value->quantity*$value->price;
+    //     }
+    //     $result['product'] = Product::whereNull('deleted_at')->latest()->limit(5)->with('productExtraProp','productImagesByMaster')->get();
+    //     $result['user_count'] = User::where('role','user')->count();
+    //     $result['user'] = User::where('role','user')->latest()->limit(10)->get();
+    //     $result['staff_count'] = User::where('role','Staff')->count();
+    //     $result['page_title'] = 'Staff || Dashboard';
+    //     return view('admin/dashboard',$result);
+    // }
 
     public function masterCategory() {
         $result['page_title'] = 'Category-list';
@@ -119,65 +126,61 @@ class PageController extends Controller
 
     }
 
-    public function staffUsersList(){
-        $result['page_title'] = 'Admin || Staff-users-list';
-        return view('admin/management/user_staff',$result);
-    }
+    // public function staffUsersList(){
+    //     $result['page_title'] = 'Admin || Staff-users-list';
+    //     return view('admin/management/user_staff',$result);
+    // }
 
-    public function orderList()
+    public function testimonials()
     {
-        $result['page_title'] = 'Admin || Order-list';
-        return view('admin/order_list',$result);
+        $result['page_title'] = 'Admin || Testimonial-list';
+        $result['customer'] = Testimonials::get();
+        return view('admin/testimonial_list',$result);
     }
 
 
-    public function myOrder()
-    {
-        $result['order'] = ContactUsModel::first();
-        $result['page_title'] = 'User || My-order';
-        return view('user/my_order',$result);
-    }
+    // public function myOrder()
+    // {
+    //     $result['order'] = ContactUsModel::first();
+    //     $result['page_title'] = 'User || My-order';
+    //     return view('user/my_order',$result);
+    // }
 
-    public function printInvoice(){
-        $result['page_title'] = 'print-invoice';
-        $result['get_store_address'] = \DB::table('xit_contact_us')->select('*')->first();
-        $order_id = request()->segment(4);
-        // print_r($order_id);die;
-        $get_mst_orders = MasterOrder::where('order_id',$order_id)->with(['getUser','productDetails','productDetails.productExtraProp'])->withTrashed()->get();
-        // print_r($get_mst_orders->toArray());die;
-        if(count($get_mst_orders) > 0){
-            // $result['final_data'] = [];
-            foreach($get_mst_orders->toArray() as $key => $order_items){
-                $result['final_data'][$key] = $order_items;
-            }
-            if(count($get_mst_orders) > 0){
-                // print_r($result);die;
-                return view('invoice/modified_invoice', $result);
-            }
-        }else{
-            return "Incorrect order id";
-        }
-        //return view('/invoice/invoice', $result);
-    }
+    // public function printInvoice(){
+    //     $result['page_title'] = 'print-invoice';
+    //     $result['get_store_address'] = \DB::table('xit_contact_us')->select('*')->first();
+    //     $order_id = request()->segment(4);
+    //     $get_mst_orders = MasterOrder::where('order_id',$order_id)->with(['getUser','productDetails','productDetails.productExtraProp'])->withTrashed()->get();
+    //     if(count($get_mst_orders) > 0){
+    //         foreach($get_mst_orders->toArray() as $key => $order_items){
+    //             $result['final_data'][$key] = $order_items;
+    //         }
+    //         if(count($get_mst_orders) > 0){
+    //             return view('invoice/modified_invoice', $result);
+    //         }
+    //     }else{
+    //         return "Incorrect order id";
+    //     }
+    // }
 
 
-    public function searchLogReport(){
-        $result['page_title'] = 'Admin || Search-log-report';
+    // public function searchLogReport(){
+    //     $result['page_title'] = 'Admin || Search-log-report';
 
-        $user_id = request()->user_id;
-        $id = explode('-',$user_id);
-        if(array_key_exists(1,$id)){
-            $result['get_user'] = \DB::table('users')->select(DB::raw('GROUP_CONCAT(first_name," ", last_name) as user_name'))->where('id',$id[1])->groupBy(['first_name', 'last_name'])->first();
-            return view('admin/report/search_log_report',$result);
-        }else{
-            return Redirect('/admin/report/search-report')->with('messagered', 'Something went wrong, please refresh your bowser.');
-        }
+    //     $user_id = request()->user_id;
+    //     $id = explode('-',$user_id);
+    //     if(array_key_exists(1,$id)){
+    //         $result['get_user'] = \DB::table('users')->select(DB::raw('GROUP_CONCAT(first_name," ", last_name) as user_name'))->where('id',$id[1])->groupBy(['first_name', 'last_name'])->first();
+    //         return view('admin/report/search_log_report',$result);
+    //     }else{
+    //         return Redirect('/admin/report/search-report')->with('messagered', 'Something went wrong, please refresh your bowser.');
+    //     }
         
-    }
-    public function orderMail(){
-        $result['page_title'] = 'Admin || order-mail';
-        return view('emails/order_notification_mail',$result);
-    }
+    // }
+    // public function orderMail(){
+    //     $result['page_title'] = 'Admin || order-mail';
+    //     return view('emails/order_notification_mail',$result);
+    // }
 
     
 }
