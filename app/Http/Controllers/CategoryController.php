@@ -65,6 +65,14 @@ class CategoryController extends Controller
     
     public function update(Request $req)
     {
+        // $request->validate([  
+        // 'ser_name'=>'required|unique:mst_services',  
+          
+        // ]);
+        //  [
+        //     'ser_name.required'=> 'Category Name Required*'
+        //  ]);
+        // dd($request);
         $id = $req->id;
         if (Mst_Category::find($id)->update($req->all()))
         {
