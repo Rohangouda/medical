@@ -12,7 +12,7 @@ class FAQ extends Model
     protected $table = "mst_faqs";
 
     protected $fillable =[
-        'service_name',
+        'service_id',
         'que1',
         'ans1',
         'que2',

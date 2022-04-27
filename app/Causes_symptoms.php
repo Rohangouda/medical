@@ -5,17 +5,17 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Treatment_Option extends Model
+class Causes_symptoms extends Model
 {
     use SoftDeletes;
 
-    protected $table = "mst_treatment_option";
+    protected $table = "mst_causes_symptoms";
 
     protected $fillable =[
         'service_id',
         'heading',
         'description',
-        'subheading',
+        'image',
         'acc_head_1',
         'paragraph1',
         'bullet1',

@@ -13,7 +13,7 @@ Route::get('/optimize', function () {
 
 Route::get('/', 'PageController@index')->name('home');
 Route::post('/theme-categories', 'HomeController@themeCategories');
-Route::get('/medfin/{id}', 'PageController@medfinpage');
+Route::get('/m2-{id}', 'PageController@medfinpage');
 // Route::post('/get-product-by-category', 'HomeController@getProductByCategory');
 Route::get('/search-in-medfin/{search_text}', 'PageController@medfinpage');
 // Route::Post('/get-record-by-gsearch', 'HomeController@globalSearchByUsers');
@@ -74,6 +74,15 @@ Route::group(['middleware'=>['LoginCheck']],function(){
         Route::post('/banner_status', 'StatusController@banner_status')->name('/banner_status');
         Route::post('/overview_status', 'StatusController@overview_status')->name('/overview_status');
         Route::post('/faq_status', 'StatusController@faq_status')->name('/faq_status');
+        Route::post('/doctor_status', 'StatusController@doctor_status')->name('/doctor_status');
+        //page publish
+        Route::post('/page_publish', 'StatusController@page_publish')->name('/page_publish');
+        //page Archive
+        Route::post('/page_archive', 'StatusController@page_archive')->name('/page_archive');
+        
+
+      //list_pages
+      Route::get('/admin/all-banner', 'PageController@bannerList');  
         
 
         
@@ -86,7 +95,15 @@ Route::group(['middleware'=>['LoginCheck']],function(){
 
             //FAQs
             Route::post('/register/content/faqs','ContentController@create_faqs')->name('master.faq');
-
+            //treatment
+            Route::post('/register/content/treatment','ContentController@create_treatment')->name('master.treatment'); 
+            //cause & symptoms
+            Route::post('/register/content/cause-and-symptoms','ContentController@create_symptoms')->name('master.symptoms');
+            //advantages
+            Route::post('/register/content/advantages','ContentController@create_advantages')->name('master.advantages'); 
+            //Appointment-Button
+            Route::post('/register/content/app-btn','ContentController@create_app_btn')->name('master.btn');
+            
             //testimonials
             Route::get('/admin/testimonials','PageController@testimonials');
             Route::post('/register/testimonials','ContentController@create_testimonials')->name('master.testimonials');

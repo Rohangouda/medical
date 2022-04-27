@@ -107,7 +107,7 @@
                                                   <thead>
                                                       <tr class="bg-info text-light">
                                                           <th>#</th>
-                                                          <th>Full Name</th>
+                                                          <th style="width: 113.6375px;">Full Name</th>
                                                           <th>Message</th>
                                                           <th>City</th>
                                                           <th>Action</th>
@@ -134,7 +134,7 @@
                         <div class="modal-dialog mt-2">
                             <div class="modal-content">
 
-                                <div class="modal-header">
+                                <div class="modal-header bg-info">
                                     <h5 class="modal-title h4" id="EditModalLabel{{$val->id}}">
                                         Update
                                         Testimonials Details</h5>

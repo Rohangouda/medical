@@ -40,8 +40,7 @@ $(document).ready(function () {
                         } else {
                             x += '<td><img src="' + baseUrl + '/medfin/favicon.png" class="img-thumbnail" style="max-height:60px;"></td>';
                         }
-                        x += '<td class="text-truncate"><button type="button" class="btn btn-sm btn-primary edit_category_detail" data-category_id=' + lVal.id + '><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button> ' +
-                            ' <button type="button" class="btn btn-sm btn-danger delete_category" data-category_id=' + lVal.id + '><i class="fa fa-trash" aria-hidden="true"></i></button></td>' +
+                        x += '<td class="text-truncate"><button type="button" class="btn btn-sm btn-primary edit_category_detail" data-category_id=' + lVal.id + '><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button> '  +
                             '</tr>';
                     });
                     $('#category_list').html(x);

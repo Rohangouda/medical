@@ -35,7 +35,7 @@
     @include('includes.login_notify')
     <!-- END Notification Sidebar-->
     <!-- Theme customizer Starts-->
-      {{-- @include('includes.login_theme_builder') --}}
+     @include('includes.login_theme_builder')
     <!-- Theme customizer Ends-->
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
@@ -70,7 +70,7 @@
     {{-- <script src="{{asset('app-assets/js/dashboard1.min.js')}}"></script> --}}
     <!-- END PAGE LEVEL JS-->
 
-    <div class="modal" id="loader">
+    <div class="modal" id="loader" style="margin-top:170px;">
         <div class="modal-dialog modal-sm mt-5">
             <div class="modal-content">
                 <div align="center" class="modal-body" >

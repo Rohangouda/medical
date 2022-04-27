@@ -13,9 +13,16 @@ class Banner extends Model
     protected $table = "banner";
 
     protected $fillable =[
-        'service_name',
+        'service_id',
         'tittle',
         'description',
+        'image',
         'Deactivate'
     ];
+
+
+    // public function service_name()
+    // {
+    //     return $this->belongsTo('App\Mst_Category','ser_name','Banner_ID');
+    // }
 }

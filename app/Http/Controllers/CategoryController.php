@@ -16,7 +16,7 @@ class CategoryController extends Controller
     {
         $data = $req->all();
         $mst_query = Mst_Category::query();
-        $mst_query = Mst_Category::whereNull('deleted_at');
+        $mst_query = Mst_Category::where('deactivate',0);
         if(!empty($data['search_text'])){
             $mst_query->where('ser_name','LIKE','%'.$data['search_text'].'%');
         }
@@ -52,8 +52,6 @@ class CategoryController extends Controller
                 $brand_name->ser_name=$ser_name;
                 $brand_name->service_id=$req->service_id;
                 $brand_name->tags=$req->tag;
-                $brand_name->level=1;
-                $brand_name->updated_by=session::get('user_id');
                 $brand_name->save();
         
         return redirect()->back()->with('message','Service has been created successfully!');
@@ -73,7 +71,11 @@ class CategoryController extends Controller
     public function update(Request $req)
     {
         $id = $req->id;
-        if (Mst_Category::find($id)->update($req->all()))
+        $name = strtolower($req->ser_name);
+        $ser_name = Str::slug($name, '-');
+        if (Mst_Category::find($id)->update([
+          'ser_name'=>$ser_name
+        ]))
         {
             return redirect()->back()->with('message', 'Service Name updated successfully!');
         }   

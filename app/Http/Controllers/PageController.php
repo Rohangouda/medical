@@ -17,7 +17,11 @@ use App\ThemeSlider;
 use App\Banner;
 use App\FAQ;
 use App\Overview;
-use App\testimonials;
+use App\Testimonials;
+use App\Treatment_Option;
+use App\Causes_symptoms;
+use App\Medfin_Advantages;
+use App\Doctor;
 
 class PageController extends Controller
 {
@@ -47,13 +51,51 @@ class PageController extends Controller
     
     public function medfinpage($id)
     {
+
+        $service_id=Mst_Category::where('ser_name',$id)->select('id')->first();
+        $specialisation_id=Mst_Category::where('ser_name',$id)->select('service_id','page_status')->first();
         $result['page_title'] = 'Medfin || Service-list';
         $result['service'] = Mst_Category::where('ser_name',$id)->first();
-        $result['banner'] = Banner::where('service_name',$id)->first();
-        $result['overview'] = Overview::where('service_name',$id)->first();
-        $result['faq'] = FAQ::where('service_name',$id)->first();
+        $result['banner'] = Banner::where('service_id',$service_id->id)->first();
+        $result['overview'] = Overview::where('service_id',$service_id->id)->first();
+        $result['faq'] = FAQ::where('service_id',$service_id->id)->first();
+        $result['advantage'] = Medfin_Advantages::where('service_id',$service_id->id)->first();
         $result['testimonial'] = Testimonials::get();
+        $result['treatment'] = Treatment_Option::where('service_id',$service_id->id)->first();
+        $result['symptoms'] = Causes_symptoms::where('service_id',$service_id->id)->first();
+        $result['doctor_status'] = Doctor::where('service_id',$service_id->id)->first();
+        //doctor
+        $url = "https://services.medfin.in/doctor/filter/admin";
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         
+        $headers = array(
+           "Content-Type: application/json",
+        );
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        
+        $data = <<<DATA
+         {
+              "specialisation": "$specialisation_id->service_id",
+              "city": "Bangalore"
+        }
+        DATA;
+        
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        
+        //for debug only!
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        
+        $resp = curl_exec($curl);
+        curl_close($curl);
+        // var_dump($resp);
+        // print_r($resp);die;
+        // print_r(json_encode(json_decode($resp)));die;
+        $result['doctor'] = json_decode($resp, true);
         return view('pages.landing.all_list', $result);
     }
 
@@ -65,6 +107,16 @@ class PageController extends Controller
 
     public function adminDashboard() {
         $result['page_title'] = 'Admin || Dashboard';
+        $result['service'] = Mst_Category::count();
+        $result['overview'] = Overview::count();
+        $result['banner'] = Banner::count();
+        $result['doctor'] = Doctor::where('Deactivate',1)->count();
+        $result['faq'] = FAQ::count();
+        $result['treatment'] = Treatment_Option::count();
+        $result['symptoms'] = Causes_symptoms::count();
+        $result['testimonial'] = Testimonials::count();
+        $result['archive_page'] = Mst_Category::where('deactivate',1)->get();
+        $result['user_list'] = User::whereNull('deleted_at')->get();
         return view('admin/dashboard',$result);
     }
 
@@ -74,33 +126,6 @@ class PageController extends Controller
         return view('admin/content',$result);
     }
     
-    // public function StaffDashboard(){
-    //     $result['product_count'] = ProductHistory::get();
-    //     $result['total_sold_count'] = 0;
-    //     $result['total_sold_amount'] = 0;
-    //     $result['total_stock_count'] = 0;
-    //     $result['total_stock_amount'] = 0;
-    //     $result['total_hold_count'] = 0;
-    //     $result['total_hold_amount'] = 0;
-    //     foreach ($result['product_count']->where('order_status',1) as $key => $value) {
-    //        $result['total_stock_count'] += $value->quantity;
-    //        $result['total_stock_amount'] += $value->quantity*$value->price;
-    //     }
-    //     foreach ($result['product_count']->where('order_status',2) as $key => $value) {
-    //        $result['total_hold_count'] += $value->quantity;
-    //        $result['total_hold_amount'] += $value->quantity*$value->price;
-    //     }
-    //     foreach ($result['product_count']->where('order_status',3) as $key => $value) {
-    //        $result['total_sold_count'] += $value->quantity;
-    //        $result['total_sold_amount'] += $value->quantity*$value->price;
-    //     }
-    //     $result['product'] = Product::whereNull('deleted_at')->latest()->limit(5)->with('productExtraProp','productImagesByMaster')->get();
-    //     $result['user_count'] = User::where('role','user')->count();
-    //     $result['user'] = User::where('role','user')->latest()->limit(10)->get();
-    //     $result['staff_count'] = User::where('role','Staff')->count();
-    //     $result['page_title'] = 'Staff || Dashboard';
-    //     return view('admin/dashboard',$result);
-    // }
 
     public function masterCategory() {
         $result['page_title'] = 'Category-list';
@@ -114,73 +139,28 @@ class PageController extends Controller
 
     public function profile() {
         if(Session::get('user_role') == "Admin" || Session::get('user_role') == "Staff"){
-           $result['page_title'] = 'Peepal-store || Profile';
+           $result['page_title'] = 'Medfin || Profile';
            $result['layout'] = 'login_layout';
            return view('admin/management/reset_password',$result);
         }
         else{
-            $result['page_title'] = 'Peepal-store || Profile';
+            $result['page_title'] = 'Medfin || Profile';
             $result['layout'] = 'home_layout';
             return view('admin/management/reset_password',$result);
         }
 
     }
 
-    // public function staffUsersList(){
-    //     $result['page_title'] = 'Admin || Staff-users-list';
-    //     return view('admin/management/user_staff',$result);
-    // }
+    public function bannerList(){
+        $result['page_title'] = 'Admin || Banner-list';
+        $result['banner'] = Banner::get();
+        return view('admin/management/banner_list',$result);
+    }
 
     public function testimonials()
     {
         $result['page_title'] = 'Admin || Testimonial-list';
         $result['customer'] = Testimonials::get();
         return view('admin/testimonial_list',$result);
-    }
-
-
-    // public function myOrder()
-    // {
-    //     $result['order'] = ContactUsModel::first();
-    //     $result['page_title'] = 'User || My-order';
-    //     return view('user/my_order',$result);
-    // }
-
-    // public function printInvoice(){
-    //     $result['page_title'] = 'print-invoice';
-    //     $result['get_store_address'] = \DB::table('xit_contact_us')->select('*')->first();
-    //     $order_id = request()->segment(4);
-    //     $get_mst_orders = MasterOrder::where('order_id',$order_id)->with(['getUser','productDetails','productDetails.productExtraProp'])->withTrashed()->get();
-    //     if(count($get_mst_orders) > 0){
-    //         foreach($get_mst_orders->toArray() as $key => $order_items){
-    //             $result['final_data'][$key] = $order_items;
-    //         }
-    //         if(count($get_mst_orders) > 0){
-    //             return view('invoice/modified_invoice', $result);
-    //         }
-    //     }else{
-    //         return "Incorrect order id";
-    //     }
-    // }
-
-
-    // public function searchLogReport(){
-    //     $result['page_title'] = 'Admin || Search-log-report';
-
-    //     $user_id = request()->user_id;
-    //     $id = explode('-',$user_id);
-    //     if(array_key_exists(1,$id)){
-    //         $result['get_user'] = \DB::table('users')->select(DB::raw('GROUP_CONCAT(first_name," ", last_name) as user_name'))->where('id',$id[1])->groupBy(['first_name', 'last_name'])->first();
-    //         return view('admin/report/search_log_report',$result);
-    //     }else{
-    //         return Redirect('/admin/report/search-report')->with('messagered', 'Something went wrong, please refresh your bowser.');
-    //     }
-        
-    // }
-    // public function orderMail(){
-    //     $result['page_title'] = 'Admin || order-mail';
-    //     return view('emails/order_notification_mail',$result);
-    // }
-
-    
+    }    
 }

@@ -5,17 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Overview extends Model
+class Medfin_Advantages extends Model
 {
     use SoftDeletes;
 
-    protected $table = "mst_overview";
+    protected $table = "mst_advantages";
 
     protected $fillable =[
         'service_id',
-        'tittle',
-        'description',
+        'heading',
         'image',
-        'updated_by'
+        'Deactivate'
     ];
 }

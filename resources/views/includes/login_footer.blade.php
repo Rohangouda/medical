@@ -19,38 +19,11 @@
     <div class="container">
 		<div class="row text-center">
 			<div class="col-12 footer-links">
-				<a href="javascript:void(0)">About Medfin</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">Terms and Conditions</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)">FAQs</a>
+				<a href="https://www.medfin.in/about-medfin" target="_blank">About Medfin</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/privacy-policy" target="_blank">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/terms-conditions" target="_blank">Terms and Conditions</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/contact-us" target="_blank">Contact Us</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.medfin.in/faq" target="_blank">FAQs</a>
 			</div>
-			<div class="col-12 social-icons-sec">
-				<ul class="list-unstyled list-inline social-icons">
-						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-fb">
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-twt">
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-gpls">
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-insta">
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" target="_blank" class="social-ytb">
-							</a>
-						</li>
-					</ul>
-			</div>
-		</div>
-        
-        
-    </div>
-        
-    <div class="text-center footer-rights">
+		</div>   
+    </div>    
+    <div class="text-center footer-rights mb-5">
         © Medfin 2019. All Rights Reserved.
     </div>
 </footer>

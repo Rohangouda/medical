@@ -2,7 +2,7 @@
 @section('content')
 <style type="text/css">
     .feature_section .box:hover {
-        background-color: #b5f3b5;
+        background-color: #99eeff;
         color: blue;
     }
 
@@ -11,7 +11,7 @@
     }
 
     .feature_section .box .img-box img {
-        width: 140px;
+        width: 90px;
     }
 </style>
 <script src="{{asset('js/custom/home_js.js?ver=')}}{{date('YmdHis')}}"></script>
