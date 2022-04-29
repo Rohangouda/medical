@@ -20,9 +20,7 @@
 <section class="feature_section layout_padding">
     <div class="container">
         <div class="heading_container text-success">
-            <h2 style="color: #2f2d46">
-                Our Services
-            </h2>
+            <h2 style="color: #2f2d46">Our Services </h2>
         </div>
         <hr>
         <div class="row _main_categories">

@@ -66,7 +66,7 @@ $(document).ready(function () {
     $(document).on('click', '.category_click', function () {
         let category_name = $(this).data('category_name');
         let category_id = $(this).data('category_id');
-        window.open(baseUrl + '/m2-' + category_name, '_self');
+        window.open(baseUrl + '/' + category_name, '_self');
         // alert('category_name : '+category_name +' category_id : '+category_id);
     });
 });

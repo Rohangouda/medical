@@ -71,7 +71,7 @@
                   <a class="dropdown-item" href="{{ URL('/profile') }}"><i class="far fa-edit"></i> Edit Profile</a>
                   <a class="dropdown-item" href="{{ URL('/my-order') }}"><i class="far fa-edit"></i> My Order</a>
                   @endif
-                  <a class="dropdown-item" href="{{URL('/logout')}}"><i class="fas fa-power-off"></i> Logout</a>
+                  <a class="dropdown-item" href="{{route('admin_logout')}}"><i class="fas fa-power-off"></i> Logout</a>
                 </div>
               </li>
             </ul>

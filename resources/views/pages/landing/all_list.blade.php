@@ -59,6 +59,7 @@
     </style>
 </head>
 <body>
+	{{dd($service)}}
 @if($service->deactivate == 0)	
 @if(Session::get('user_role') == 'Admin' && $service->page_status == 0 || $service->page_status == 1 )
 <script>
@@ -103,7 +104,7 @@
  <div class="container">
 	 <a class="navbar-brand" href="{{URL::to('/')}}"><img class="white-logo" src="{{ asset('medfin/images/medfin-logo-white.svg') }}" height="27" alt=""/><img class="blue-logo" src="images/medfin-logo.svg" height="27" alt=""/></a>
   <form class="form-inline my-2 my-lg-0">
-	<a class="btn btn-call" href="tel:7026-200-200"><span class="btn-call-icon"></span> 7026-200-200</a>
+	<a class="btn btn-call" href="tel:{{$contact ?? '7026200200'}}"><span class="btn-call-icon"></span> {{$contact ?? '7026200200'}}</a>
      
 	<a class="btn btn-appointment" href="javascript:void(0)" data-toggle="modal" data-target="#appointment-form"><span class="btn-appointment-icon"></span> Book Appointment</a>
    </form>
@@ -122,7 +123,7 @@
 					@else
 					<a class="dropdown-item"  data-toggle="modal"
 					data-target="#deactivatemodal{{$service->id ?? ''}}"><i class="fa fa-exclamation-triangle mr-2"></i>  Draft Mode</a>
-		@endif
+		         @endif
                   <a class="dropdown-item" data-toggle="modal" data-target="#Archivemodal{{$service->id ?? ''}}"><i class="fa fa-trash mr-2"></i>Archive</a>
                
 				</div>
@@ -145,7 +146,7 @@
                     Dashboard</a>
                   <a class="dropdown-item" href="{{URL('/admin/profile')}}"> Edit Profile</a>
                   @endif
-                  <a class="dropdown-item" href="{{URL('/logout')}}"> Logout</a>
+                  <a class="dropdown-item" href="{{URL('/admin/logout')}}"> Logout</a>
                 </div>
               </li>
             </ul>
@@ -2560,7 +2561,7 @@
 <div class="container-fluid multi-sticky d-md-none">
 	<div class="row">
 		<a class="col btn btn-lg btn-danger"  href="javascript:void(0)" data-toggle="modal" data-target="#appointment-form">Book a Free Consultation</a>
-		<a class="col btn btn-lg btn-info" href="tel:7026200200">Call Now</a>
+		<a class="col btn btn-lg btn-info" href="tel:{{$contact ?? '7026200200'}}">Call Now</a>
 	</div>
 </div>
 <!-- Multi Sticky Buttons Ends -->

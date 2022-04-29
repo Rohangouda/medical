@@ -724,7 +724,6 @@ class ContentController extends Controller
 
     public function create_app_btn(Request $req)
     {
-     dd($req);
          if($req->id == null)
          {
             $validator = Validator::make($req->all(), [
@@ -743,7 +742,6 @@ class ContentController extends Controller
             return redirect()->back()->with('message','Appointment Button has been updated successfully!');
         }
         else{
-            dd(hi);
             $validator = Validator::make($req->all(), [
                 'btn_name' => 'required|min:3'
             ]);

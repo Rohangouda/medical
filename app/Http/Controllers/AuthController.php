@@ -190,6 +190,7 @@ class AuthController extends Controller
     {
         $this->guard()->logout();
         session()->flush();
+        // print_r("hi");die;
         return redirect('/');
         // return response()->json(['message' => 'Successfully logged out']);
     }

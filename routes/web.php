@@ -13,7 +13,7 @@ Route::get('/optimize', function () {
 
 Route::get('/', 'PageController@index')->name('home');
 Route::post('/theme-categories', 'HomeController@themeCategories');
-Route::get('/m2-{id}', 'PageController@medfinpage');
+Route::get('/{serviceName}', 'PageController@medfinpage');
 // Route::post('/get-product-by-category', 'HomeController@getProductByCategory');
 Route::get('/search-in-medfin/{search_text}', 'PageController@medfinpage');
 // Route::Post('/get-record-by-gsearch', 'HomeController@globalSearchByUsers');
@@ -26,7 +26,7 @@ Route::get('/order-mail', 'PageController@orderMail');
 
 Route::post('/user-self-registration', 'AuthController@userSelfRegistration');
 Route::post('/verifyLoginCredential','AuthController@login');
-Route::get('/logout', 'AuthController@logout');
+
 
 Route::get('/clear-cache', function () {
 	Artisan::call('config:clear');
@@ -40,6 +40,11 @@ Route::get('/clear-cache', function () {
 
 Route::group(['middleware'=>['LoginCheck']],function(){
     //-----OnlyAdminAccessibleRoute-----
+    // Route::get('/logout', function(){
+    //     print_r("hi");die;
+    // })->name('admin_logout');
+
+    Route::get('/admin/logout','AuthController@logout');
 
     Route::group(['middleware' => ['OnlyAdminAccessibleRoute']], function() {
         Route::get('/admin/dashboard', 'PageController@adminDashboard');

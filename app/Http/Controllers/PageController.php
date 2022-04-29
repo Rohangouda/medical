@@ -49,13 +49,12 @@ class PageController extends Controller
         return view('pages.landing.all_list', $result);
     }
     
-    public function medfinpage($id)
+    public function medfinpage($serviceName)
     {
-
-        $service_id=Mst_Category::where('ser_name',$id)->select('id')->first();
-        $specialisation_id=Mst_Category::where('ser_name',$id)->select('service_id','page_status')->first();
+        $service_id=Mst_Category::where('ser_name',$serviceName)->select('id')->first();
+        $specialisation_id=Mst_Category::where('ser_name',$serviceName)->select('service_id','page_status')->first();
         $result['page_title'] = 'Medfin || Service-list';
-        $result['service'] = Mst_Category::where('ser_name',$id)->first();
+        $result['service'] = Mst_Category::where('ser_name',$serviceName)->first();
         $result['banner'] = Banner::where('service_id',$service_id->id)->first();
         $result['overview'] = Overview::where('service_id',$service_id->id)->first();
         $result['faq'] = FAQ::where('service_id',$service_id->id)->first();
@@ -64,6 +63,28 @@ class PageController extends Controller
         $result['treatment'] = Treatment_Option::where('service_id',$service_id->id)->first();
         $result['symptoms'] = Causes_symptoms::where('service_id',$service_id->id)->first();
         $result['doctor_status'] = Doctor::where('service_id',$service_id->id)->first();
+        
+        
+         $url = "https://services.medfin.in/lead/lead/marketing-info?source=Google&city=Hyderabad&service=243&dynamic";
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                $resp = curl_exec($ch);
+                $http_code=curl_getinfo($ch,CURLINFO_HTTP_CODE);
+                if($http_code == 200)
+                {
+                        $result = json_decode($resp, true);
+                         $contact=$result['data']['contact'];
+                         $result['contact'] = $contact;
+                }
+                else
+                {
+                    dd("505");
+                }
+                 curl_close($ch);
+        
         //doctor
         $url = "https://services.medfin.in/doctor/filter/admin";
 
@@ -83,7 +104,6 @@ class PageController extends Controller
               "city": "Bangalore"
         }
         DATA;
-        
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
         
         //for debug only!

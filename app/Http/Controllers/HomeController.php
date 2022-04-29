@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function getAllCategory(Request $req){
         $data = $req->all();
         $mst_query = Mst_Category::query();
-        $mst_query = Mst_Category::where('deactivate',0);
+        $mst_query = Mst_Category::where('deactivate', 4)->where('deactivate',5);
         if(!empty($data['search_text'])){
             $mst_query->where('ser_name','LIKE','%'.$data['search_text'].'%');
         }
@@ -41,7 +41,7 @@ class HomeController extends Controller
 
     public function themeCategories(Request $req){
         $data = $req->all();
-        $res = Mst_Category::where('deactivate',0)->orderBy('ser_name','ASC')->paginate($data['perPage']);
+        $res = Mst_Category::where('deactivate',0)->orWhere('deactivate',1)->orWhere('deactivate',2)->orderBy('ser_name','ASC')->paginate($data['perPage']);
         if($res != null){
             return response()->json(['status' => 200, 'category_list' => $res]);
         }else {

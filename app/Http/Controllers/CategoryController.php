@@ -16,7 +16,7 @@ class CategoryController extends Controller
     {
         $data = $req->all();
         $mst_query = Mst_Category::query();
-        $mst_query = Mst_Category::where('deactivate',0);
+        $mst_query = where('deactivate', 4)->where('deactivate',5);
         if(!empty($data['search_text'])){
             $mst_query->where('ser_name','LIKE','%'.$data['search_text'].'%');
         }
